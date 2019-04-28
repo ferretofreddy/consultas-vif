@@ -1,5 +1,5 @@
 export const {
-  APP_PORT = 80,
+  APP_PORT = process.env.PORT,
   DB_USERNAME = 'Admin001',
   DB_PASSWORD = 'Admin001',
   DB_HOST = 'ferreto0-jva9y.gcp.mongodb.net',
