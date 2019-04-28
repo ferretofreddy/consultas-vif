@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import typeDefs from './typeDefs'
 import resolvers from './resolvers'
 import {
-  APP_PORT, IN_PROD, DB_USERNAME, DB_PASSWORD, DB_HOST, DB_NAME
+  APP_PORT, DB_USERNAME, DB_PASSWORD, DB_HOST, DB_NAME
 } from './config'
 
 const moment = require('moment-timezone')
@@ -25,7 +25,7 @@ console.log(dateCR);
     const server = new ApolloServer({
       typeDefs,
       resolvers,
-      playground: true // !IN_PROD
+      playground: true
     })
 
     server.applyMiddleware({ app })
