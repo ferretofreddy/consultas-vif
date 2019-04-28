@@ -1,0 +1,19 @@
+{
+  "name": "app.json",
+  "scripts": {
+    "postdeploy": "index.js"
+  },
+  "env": {
+    "APP_PORT": "80",
+    "NODE_ENV": "production",
+    "DB_USERNAME": "Admin001",
+    "DB_PASSWORD": "Admin001",
+    "DB_HOST": "ferreto0-jva9y.gcp.mongodb.net",
+    "DB_PORT": "17027",
+    "DB_NAME": "vif"
+  },
+  "formation": {},
+  "addons": [],
+  "buildpacks": [],
+  "stack": "container"
+}
