@@ -25,7 +25,7 @@ console.log(dateCR);
     const server = new ApolloServer({
       typeDefs,
       resolvers,
-      playground: !IN_PROD
+      playground: true // !IN_PROD
     })
 
     server.applyMiddleware({ app })
