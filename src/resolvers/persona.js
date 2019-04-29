@@ -26,12 +26,12 @@ export default {
 
       return Persona.create(args)
     },
-    editPersona: (root, { id, args }, context, info) => {
+    editPersona: (root, args, context, info) => {
       // TODO: not auth
 
       // validation
 
-      return Persona.findByIdAndUpdate({ id }, { args })
+      return Persona.findByIdAndUpdate({ args })
     }
   },
   Persona: {

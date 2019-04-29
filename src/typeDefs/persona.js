@@ -10,7 +10,7 @@ export default gql`
 
     extend type Mutation {
        addPersona(nombre: String!, identificacion: String!, f_nacimiento: String, sexo: String, edad: Int, provincia: String, canton: String, distrito: String, direccion: String, casos: [String]): Persona
-       editPersona(nombre: String!, identificacion: String!, f_nacimiento: String, sexo: String, edad: Int, provincia: String, canton: String, distrito: String, direccion: String, casos: [String]): Persona 
+       editPersona(id: ID!, nombre: String, identificacion: String, f_nacimiento: String, sexo: String, edad: Int, provincia: String, canton: String, distrito: String, direccion: String, casos: [String]): Persona 
     }
 
     type Persona {
