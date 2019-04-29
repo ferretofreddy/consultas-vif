@@ -7,6 +7,8 @@ import {
   APP_PORT, DB_USERNAME, DB_PASSWORD, DB_HOST, DB_NAME
 } from './config'
 
+// Configuracion de zona horaria a zona horaria de Costa Rica
+
 const moment = require('moment-timezone')
 const dateCR = moment.tz(Date.now(), 'America/Costa_Rica')
 console.log(dateCR);
