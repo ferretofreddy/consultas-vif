@@ -30,8 +30,12 @@ export default {
       // TODO: not auth
 
       // validation
-
-      return Persona.findByIdAndUpdate({ args })
+      const id = args.id
+      const nombre = args.nombre
+      const identificacion = args.identificacion
+      // args.nombre, args.identificacion, args.f_nacimiento, args.sexo, args.edad, args.provincia, args.canton, args.distrito, args.direccion
+      var persona = Persona.findByIdAndUpdate(id, { $set: { nombre: nombre, identificacion: identificacion } })
+      return persona
     }
   },
   Persona: {
