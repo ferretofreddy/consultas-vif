@@ -1,6 +1,7 @@
-const { buildSchema } = require('graphql')
+// const { buildSchema } = require('graphql')
+const { gql } = require('apollo-server')
 
-module.exports = buildSchema(`
+const typeDefs = gql`
 type Persona {
   _id: ID!
   nombre: String
@@ -157,4 +158,5 @@ schema {
   query: RootQuery
   mutation: RootMutation
 }
-`);
+`
+module.exports = typeDefs
