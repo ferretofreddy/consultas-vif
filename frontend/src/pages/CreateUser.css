@@ -1,0 +1,22 @@
+body{
+  margin: 0px;
+  padding: 0px;
+}
+
+h2{
+  text-align: center;
+}
+
+.FormCard{
+  width: 60%;
+  top: 10vh;
+  left: 20%;
+}
+
+@media (max-width: 561px) {
+  .FormCard {
+    top: 2vh;
+    width: 90%;
+    left: 5%;
+  }
+}
