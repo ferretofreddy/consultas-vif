@@ -5,12 +5,14 @@ import MainNavigation from '../components/Navigation/MainNavigation';
 import CasoList from '../components/Caso/CasoList';
 import InformeList from '../components/Informe/InformeList';
 import AuthContext from '../context/auth-context';
+import server from '../components/Variable/Variable';
 
 import './FindPerson.css';
 
 
 class FindPerson extends Component {
   state = {
+    server: server.server,
     listar: false,
     buscar: true,
     selectedCaso: null,
@@ -104,7 +106,7 @@ class FindPerson extends Component {
 
     const token = this.context.token;
 
-    fetch('http://localhost:4000/graphql', {
+    fetch(`${this.state.server}`, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
@@ -372,41 +374,38 @@ class FindPerson extends Component {
               {this.state.listar ? (
                 <div>
                   <Form>
-                    <Form.Row>
-                      <Form.Group as={Col} >
-                        <Form.Label>Identificación</Form.Label>
-                        <Form.Control readOnly defaultValue={this.state.identificacion} />
-                      </Form.Group>
 
-                      <Form.Group as={Col} >
-                        <Form.Label>Nombre</Form.Label>
-                        <Form.Control readOnly defaultValue={this.state.nombre} />
-                      </Form.Group>
+                    <Form.Group className="col-sm-12 col-md-4" >
+                      <Form.Label>Identificación</Form.Label>
+                      <Form.Control readOnly defaultValue={this.state.identificacion} />
+                    </Form.Group>
 
-                      <Form.Group as={Col} >
-                        <Form.Label>Fecha de nacimiento</Form.Label>
-                        <Form.Control readOnly defaultValue={new Date(this.state.fechaNacimiento).toLocaleDateString()} />
-                      </Form.Group>
-                    </Form.Row>
+                    <Form.Group className="col-sm-12 col-md-4" >
+                      <Form.Label>Nombre</Form.Label>
+                      <Form.Control readOnly defaultValue={this.state.nombre} />
+                    </Form.Group>
 
-                    <Form.Row>
-                      <Form.Group as={Col} >
-                        <Form.Label>Provincia</Form.Label>
-                        <Form.Control readOnly defaultValue={this.state.provincia} />
-                      </Form.Group>
+                    <Form.Group className="col-sm-12 col-md-4" >
+                      <Form.Label>Fecha de nacimiento</Form.Label>
+                      <Form.Control readOnly defaultValue={new Date(this.state.fechaNacimiento).toLocaleDateString()} />
+                    </Form.Group>
 
-                      <Form.Group as={Col} >
-                        <Form.Label>Cantón</Form.Label>
-                        <Form.Control readOnly defaultValue={this.state.canton} />
-                      </Form.Group>
+                    <Form.Group className="col-sm-12 col-md-4" >
+                      <Form.Label>Provincia</Form.Label>
+                      <Form.Control readOnly defaultValue={this.state.provincia} />
+                    </Form.Group>
 
-                      <Form.Group as={Col} >
-                        <Form.Label>Distrito</Form.Label>
-                        <Form.Control readOnly defaultValue={this.state.distrito} />
-                      </Form.Group>
-                    </Form.Row>
+                    <Form.Group className="col-sm-12 col-md-4" >
+                      <Form.Label>Cantón</Form.Label>
+                      <Form.Control readOnly defaultValue={this.state.canton} />
+                    </Form.Group>
 
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Group className="col-sm-12 col-md-4" >
+                      <Form.Label>Distrito</Form.Label>
+                      <Form.Control readOnly defaultValue={this.state.distrito} />
+                    </Form.Group>
+
+                    <Form.Group className="col-sm-12 col-md-12 col-lg-12">
                       <Form.Label>Dirección exacta</Form.Label>
                       <Form.Control as="textarea" rows="3" readOnly defaultValue={this.state.direccion} />
                     </Form.Group>
@@ -414,7 +413,7 @@ class FindPerson extends Component {
                   <br />
                   <Card>
                     <Card.Body className="mx-auto text-dark">
-                      <Card.Title><h3>Expedientes judiciales asociados</h3></Card.Title>
+                      <Card.Title ><h3>Expedientes judiciales asociados</h3></Card.Title>
                       <div className='card-text'>
                         <CasoList
                           casos={this.state.casos}

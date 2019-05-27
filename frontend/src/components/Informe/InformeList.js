@@ -21,7 +21,7 @@ const informeList = props => {
   });
 
   return (
-  <Table className="striped bordered hover bg-light col-md-12">
+  <Table className="bordered">
   <thead>
       <tr className="mx-auto">
         <th>Informe Policial N°</th>

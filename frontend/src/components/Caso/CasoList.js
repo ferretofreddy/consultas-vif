@@ -19,16 +19,15 @@ const casoList = props => {
     );
     
   });
-
   return (
-  <Table className="striped bordered hover bg-light col-md-12">
+  <Table className="striped bordered">
   <thead>
-      <tr className="mx-auto">
-        <th>Expediente N°</th>
-        <th>Juzgado</th>
-        <th>Nombre del agresor</th>
-        <th>Nombre de la víctima</th>
-        <th>Detalles</th>
+      <tr>
+        <th className=" ">Expediente N°</th>
+        <th className=" ">Juzgado</th>
+        <th className=" ">Nombre del agresor</th>
+        <th className=" ">Nombre de la víctima</th>
+        <th className=" ">Detalles</th>
       </tr>
     </thead>
     <tbody>{casos}</tbody>

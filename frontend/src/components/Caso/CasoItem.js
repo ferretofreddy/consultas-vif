@@ -6,11 +6,11 @@ import './CasoItem.css';
 
 const casoItem = props => (
   <tr key={props.casoId}>
-    <td>{props.expediente}</td>
-    <td>{props.juzgado}</td>
-    <td>{props.imputadoNombre}</td>
-    <td>{props.ofendidoNombre}</td>
-    <td>
+    <td className=" ">{props.expediente}</td>
+    <td className=" ">{props.juzgado}</td>
+    <td className=" ">{props.imputadoNombre}</td>
+    <td className=" ">{props.ofendidoNombre}</td>
+    <td className=" ">
       <Button variant="outline-primary" onClick={props.onDetail.bind(this, props.casoId)}>
         Ver Expediente
       </Button>

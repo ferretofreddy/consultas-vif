@@ -4,8 +4,12 @@ import { Form, Button, Card, Col } from 'react-bootstrap';
 import './CreateUser.css';
 import AuthContext from '../context/auth-context';
 import MainNavigation from '../components/Navigation/MainNavigation';
+import server from '../components/Variable/Variable';
 
 class CreateUserPage extends Component {
+  state = {
+    server: server.server
+  }
 
   static contextType = AuthContext;
 
@@ -50,7 +54,7 @@ class CreateUserPage extends Component {
 
     }
 
-    fetch('http://localhost:4000/graphql', {
+    fetch(`${this.state.server}`, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {

@@ -3,8 +3,12 @@ import { Form, Button, Card } from 'react-bootstrap';
 
 import './Login.css';
 import AuthContext from '../context/auth-context';
+import server from '../components/Variable/Variable';
 
 class LoginPage extends Component {
+  state = {
+    server: server.server
+  };
 
   static contextType = AuthContext;
 
@@ -41,7 +45,11 @@ class LoginPage extends Component {
       }
     };
 
-    fetch('http://localhost:4000/graphql', { //'http://localhost:4000/graphql'
+    
+    console.log(this.state.server);
+
+    // 'http://localhost:4000/graphql' `'${this.state.server}'`  'http://192.168.0.101:4000/graphql'
+    fetch(`${this.state.server}`, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
