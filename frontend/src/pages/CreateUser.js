@@ -76,51 +76,51 @@ class CreateUserPage extends Component {
     return (
       <React.Fragment>
         <MainNavigation />
-      
-      <Card className='col-lg-6 mx-auto mt-5 card text-white bg-dark' border="primary">
-        <Card.Header><h2>Crear nuevo Usuario</h2></Card.Header>
-        <Card.Body>
-          <Form onSubmit={this.submitHandler} >
-            <Form.Row>
-              <Form.Group as={Col} >
-                <Form.Label>Correo electrónico</Form.Label>
-                <Form.Control as='input' id="email" type="email" ref={this.emailEl} />
-              </Form.Group>
 
-              <Form.Group as={Col} >
-                <Form.Label>Contraseña</Form.Label>
-                <Form.Control as='input' id="password" type="password" ref={this.passwordEl} />
-              </Form.Group>
-            </Form.Row>
+        <Card className='col-lg-6 mx-auto mt-5 card text-white bg-dark' border="primary">
+          <Card.Header><h2>Crear nuevo Usuario</h2></Card.Header>
+          <Card.Body>
+            <Form onSubmit={this.submitHandler} >
+              <Form.Row>
+                <Form.Group as={Col} >
+                  <Form.Label>Correo electrónico</Form.Label>
+                  <Form.Control as='input' id="email" type="email" ref={this.emailEl} />
+                </Form.Group>
 
-            <Form.Row>
-              <Form.Group as={Col} >
-                <Form.Label>Identificacion</Form.Label>
-                <Form.Control as='input' id="identificacion" type="text" ref={this.identificacionEl}/>
-              </Form.Group>
+                <Form.Group as={Col} >
+                  <Form.Label>Contraseña</Form.Label>
+                  <Form.Control as='input' id="password" type="password" ref={this.passwordEl} />
+                </Form.Group>
+              </Form.Row>
 
-              <Form.Group as={Col} >
-                <Form.Label>Nombre</Form.Label>
-                <Form.Control as='input' id="name" type="text" ref={this.nameEl}/>
-              </Form.Group>
+              <Form.Row>
+                <Form.Group as={Col} >
+                  <Form.Label>Identificacion</Form.Label>
+                  <Form.Control as='input' id="identificacion" type="text" ref={this.identificacionEl} />
+                </Form.Group>
 
-              <Form.Group as={Col} >
-                <Form.Label>Roll</Form.Label>
-                <Form.Control as="select" id="roll" ref={this.rollEl}>
-                  <option>Seleccione</option>
-                  <option>Administrador</option>
-                  <option>AgentePPP</option>
-                  <option>Oficialia</option>
-                </Form.Control>
-              </Form.Group>
-            </Form.Row>
+                <Form.Group as={Col} >
+                  <Form.Label>Nombre</Form.Label>
+                  <Form.Control as='input' id="name" type="text" ref={this.nameEl} />
+                </Form.Group>
 
-            <Button variant="outline-primary" type="submit">
-              Crear usuario
+                <Form.Group as={Col} >
+                  <Form.Label>Roll</Form.Label>
+                  <Form.Control as="select" id="roll" ref={this.rollEl}>
+                    <option>Seleccione</option>
+                    <option>Administrador</option>
+                    <option>AgentePPP</option>
+                    <option>Oficialia</option>
+                  </Form.Control>
+                </Form.Group>
+              </Form.Row>
+
+              <Button variant="outline-primary" type="submit">
+                Crear usuario
             </Button>
-          </Form>
-        </Card.Body>
-      </Card>
+            </Form>
+          </Card.Body>
+        </Card>
       </React.Fragment>
     );
   }
