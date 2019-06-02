@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Card } from 'react-bootstrap';
+/* import { Form, Button, Card } from 'react-bootstrap'; */
 
 import './Login.css';
 import AuthContext from '../context/auth-context';
@@ -45,7 +45,7 @@ class LoginPage extends Component {
       }
     };
 
-    
+
     console.log(this.state.server);
 
     // 'http://localhost:4000/graphql' `'${this.state.server}'`  'http://192.168.0.101:4000/graphql'
@@ -80,7 +80,40 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <Card className='col-lg-4 mx-auto mt-5 card'>
+      <div className="loginContainer">
+        <div className="loginLegend mx-auto">
+          <h1>Login</h1>
+        </div>
+        <div>
+          <form className="loginForm col-md-4" onSubmit={this.submitHandler}>
+
+            <fieldset>
+              <div className="form-group">
+                <label for="identificacion" className="text-right loginLabel">Identificación:</label>
+                <div className=" ">
+                  <input type="text" className="form-control-plaintext loginInput" id="identificacion" placeholder="Formato 101110111" ref={this.identificacionEl} />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label for="password" className="text-right loginLabel">Contraseña:</label>
+                <div className="">
+                  <input type="password" className="form-control-plaintext loginInput" id="password" placeholder="Ingrese su contraseña" ref={this.passwordEl} />
+                </div>
+              </div>
+              <button type="submit" className="btn btn-lg btn-block loginBtn">Ingresar</button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default LoginPage;
+
+
+/* <Card className='col-lg-4 mx-auto mt-5 card'>
         <Card.Header className="pb-4">
           <h2>Inicie sesion</h2>
         </Card.Header>
@@ -104,10 +137,4 @@ class LoginPage extends Component {
             </Button>
           </Form>
         </Card.Body>
-      </Card>
-    );
-
-  }
-}
-
-export default LoginPage;
+      </Card> */

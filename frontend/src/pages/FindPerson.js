@@ -10,7 +10,7 @@ import server from '../components/Variable/Variable';
 import './FindPerson.css';
 
 
-class FindPerson extends Component {
+class FindPersonPage extends Component {
   state = {
     server: server.server,
     listar: false,
@@ -373,34 +373,34 @@ class FindPerson extends Component {
             <Card.Body>
               {this.state.listar ? (
                 <div>
-                  <Form>
+                  <Form className="form-inline">
 
-                    <Form.Group className="col-sm-12 col-md-4" >
+                    <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
                       <Form.Label>Identificación</Form.Label>
                       <Form.Control readOnly defaultValue={this.state.identificacion} />
                     </Form.Group>
 
-                    <Form.Group className="col-sm-12 col-md-4" >
+                    <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
                       <Form.Label>Nombre</Form.Label>
                       <Form.Control readOnly defaultValue={this.state.nombre} />
                     </Form.Group>
 
-                    <Form.Group className="col-sm-12 col-md-4" >
+                    <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
                       <Form.Label>Fecha de nacimiento</Form.Label>
                       <Form.Control readOnly defaultValue={new Date(this.state.fechaNacimiento).toLocaleDateString()} />
                     </Form.Group>
 
-                    <Form.Group className="col-sm-12 col-md-4" >
+                    <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
                       <Form.Label>Provincia</Form.Label>
                       <Form.Control readOnly defaultValue={this.state.provincia} />
                     </Form.Group>
 
-                    <Form.Group className="col-sm-12 col-md-4" >
+                    <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
                       <Form.Label>Cantón</Form.Label>
                       <Form.Control readOnly defaultValue={this.state.canton} />
                     </Form.Group>
 
-                    <Form.Group className="col-sm-12 col-md-4" >
+                    <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
                       <Form.Label>Distrito</Form.Label>
                       <Form.Control readOnly defaultValue={this.state.distrito} />
                     </Form.Group>
@@ -443,4 +443,4 @@ class FindPerson extends Component {
   }
 }
 
-export default FindPerson;
+export default FindPersonPage;

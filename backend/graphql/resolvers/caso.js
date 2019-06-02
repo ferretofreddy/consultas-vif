@@ -231,8 +231,6 @@ module.exports = {
     /* if (!req.isAuth) {
       throw new Error('Acceso Denegado!')
     } */
-    var imputadoId = '5cd610ba4c821f99e1a20318'
-    var ofendidoId = '5cd6112e4c821f99e1a20319'
 
     const casoExistente = await Caso.findOne({ expediente: args.casoInput.expediente })
     if (casoExistente) {
@@ -250,8 +248,8 @@ module.exports = {
       cambioDomicilioVict: args.casoInput.cambioDomicilioVict,
       medidasProteccion: args.casoInput.medidasProteccion,
       f_emisionMedidas: args.casoInput.f_emisionMedidas,
-      imputado: imputadoId, // req.imputadoId,
-      ofendido: ofendidoId // req.ofendidoId
+      imputado: args.casoInput.imputado,
+      ofendido: args.casoInput.ofendido
     })
     let casoCreado
     try {
@@ -275,7 +273,7 @@ module.exports = {
         updatedAt: new Date(result._doc.updatedAt).toLocaleDateString()
       }
 
-      const imputado = await Persona.findById(imputadoId) // req.imputadoId Crear Variable para almacenar el _id del imputado buscado o creado
+      const imputado = await Persona.findById(args.casoInput.imputado) // req.imputadoId Crear Variable para almacenar el _id del imputado buscado o creado
 
       if (!imputado) {
         throw new Error('Imputado no encontrado.')
@@ -283,7 +281,7 @@ module.exports = {
       imputado.casos.push(caso)
       await imputado.save()
 
-      const ofendido = await Persona.findById(ofendidoId) // req.ofendidoId Crear Variable para almacenar el _id del ofendido buscado o creado
+      const ofendido = await Persona.findById(args.casoInput.ofendido) // req.ofendidoId Crear Variable para almacenar el _id del ofendido buscado o creado
 
       if (!ofendido) {
         throw new Error('Ofendido no encontrado.')

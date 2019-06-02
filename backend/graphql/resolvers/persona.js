@@ -162,9 +162,9 @@ module.exports = {
   },
 
   buscarPersona: async ({ identificacion }, req) => {
-    /* if (!req.isAuth) {
-      throw new Error('Acceso Denegado!');
-    } */
+    if (!req.isAuth) {
+      throw new Error('Acceso Denegado!')
+    }
     try {
       const persona = await Persona.findOne({ identificacion: identificacion })
       return {

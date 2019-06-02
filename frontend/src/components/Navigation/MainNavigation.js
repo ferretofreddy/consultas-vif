@@ -20,10 +20,13 @@ const mainNavigation = props => (
               <React.Fragment>
                 <Nav className="mr-auto">
                   <Nav.Link>
-                    <NavLink to="/newuser">Crear Usuario</NavLink>
+                    <NavLink to="/newuser">Crear usuario</NavLink>
                   </Nav.Link>
                   <Nav.Link>
-                    <NavLink to="/findperson">Buscar Persona</NavLink>
+                    <NavLink to="/findperson">Buscar persona</NavLink>
+                  </Nav.Link>
+                  <Nav.Link>
+                    <NavLink to="/createcaso">Crear caso</NavLink>
                   </Nav.Link>
                 </Nav>
                 <Button variant="outline-primary" onClick={context.logout}>Logout</Button>

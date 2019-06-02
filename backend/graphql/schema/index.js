@@ -105,6 +105,8 @@ input CasoInput {
   cambioDomicilioVict: Boolean
   medidasProteccion: Boolean
   f_emisionMedidas: String
+  imputado: String!
+  ofendido: String!
 }
 
 input InformeInput {
@@ -157,4 +159,4 @@ schema {
   query: RootQuery
   mutation: RootMutation
 }
-`);
+`)

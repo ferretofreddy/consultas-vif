@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import LoginPage from './pages/Login';
 import CreateUserPage from './pages/CreateUser';
 import FindPersonPage from './pages/FindPerson';
+import CreateCasoPage from './pages/CreateCaso';
 import AuthContext from './context/auth-context';
 
 import './App.css';
@@ -37,11 +38,11 @@ class App extends Component {
             }}
           >
             <Switch>
-              {this.state.token && <Redirect from="/" to="/newuser" exact />}
+              {this.state.token && <Redirect from="/" to="/findperson" exact />}
               {!this.state.token && (
                 <Redirect from="/" to="/login" exact />
               )}
-              {this.state.token && <Redirect from="/login" to="/newuser" exact />}
+              {this.state.token && <Redirect from="/login" to="/findperson" exact />}
               {!this.state.token && (
                 <Route path="/login" component={LoginPage} />
               )}
@@ -50,6 +51,9 @@ class App extends Component {
               )}
               {this.state.token && (
                 <Route path="/findperson" component={FindPersonPage} />
+              )}
+              {this.state.token && (
+                <Route path="/createcaso" component={CreateCasoPage} />
               )}
               {!this.state.token && <Redirect to="/login" exact />}
             </Switch>
