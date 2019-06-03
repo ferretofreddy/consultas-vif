@@ -16,24 +16,18 @@ const mainNavigation = props => (
           <div className="collapse navbar-collapse" id="navbarColor01">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-
                   <NavLink className="nav-link" to="/findperson">Buscar Persona</NavLink>
                   <span className="sr-only">(current)</span>
-
               </li>
               <li className="nav-item">
-
                   <NavLink className="nav-link" to="/newuser">Crear Usuario</NavLink>
-
               </li>
               <li className="nav-item">
-
                   <NavLink className="nav-link" to="/createcaso">Crear Caso</NavLink>
-
               </li>
             </ul>
             <form className="form-inline my-2 my-lg-0">
-              <input className="form-control mr-sm-2 plain-text disabled-input" type="text" defaultValue={context.login.identificacion}/>
+            <p>{context.login.identificacion}</p>
               <button className="btn btn-secondary my-2 my-sm-0" onClick={context.logout}>Cerrar sesión</button>
             </form>
           </div>

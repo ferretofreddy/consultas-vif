@@ -13,8 +13,10 @@ class CreateCasoPage extends Component {
     NewCaso: true,
     FindImputado: false,
     CreateImputado: false,
+    ImputadoNonData: false,
     FindOfendido: false,
     CreateOfendido: false,
+    OfendidoNonData: false,
     Result: false,
     imputadoId: null,
     imputadoIdentificacion: null,
@@ -208,7 +210,7 @@ class CreateCasoPage extends Component {
           const personaIdentificacion = resData.data.buscarPersona.identificacion;
 
           if (resData === null) {
-            this.setState({ imputadoId: null, imputadoIdentificacion: null });
+            this.setState({ imputadoId: null, imputadoIdentificacion: null, FindImputado: false, ImputadoNonData: true });
           }
           if (this.isActive) {
             this.setState({
@@ -225,7 +227,7 @@ class CreateCasoPage extends Component {
           const personaIdentificacion = resData.data.buscarPersona.identificacion;
 
           if (resData === null) {
-            this.setState({ ofendidoId: null, ofendidoIdentificacion: null });
+            this.setState({ ofendidoId: null, ofendidoIdentificacion: null, FindOfendido: false, OfendidoNonData: true });
           }
           if (this.isActive) {
             this.setState({
@@ -245,14 +247,12 @@ class CreateCasoPage extends Component {
 
   crearImputado = event => {
     event.preventDefault();
-    this.setState({ CreateImputado: true });
-    /* crearPersonaHandler(); */
+    this.setState({ CreateImputado: true, ImputadoNonData: false });
   };
 
   crearOfendido = event => {
     event.preventDefault();
-    this.setState({ CreateOfendido: true });
-    /* crearPersonaHandler(); */
+    this.setState({ CreateOfendido: true, OfendidoNonData: false });
   };
 
   crearPersonaHandler = event => {
@@ -322,8 +322,9 @@ class CreateCasoPage extends Component {
           }
           if (this.isActive) {
             this.setState({
-              imputadoId: personaId, imputadoIdentificacion: personaIdentificacion
+              imputadoId: personaId, imputadoIdentificacion: personaIdentificacion, CreateImputado: false, NewCaso: true
             });
+            console.log(this.state.imputadoIdentificacion);
           }
         };
         if (this.state.CreateOfendido) {
@@ -335,14 +336,14 @@ class CreateCasoPage extends Component {
           }
           if (this.isActive) {
             this.setState({
-              ofendidoId: personaId, ofendidoIdentificacion: personaIdentificacion
+              ofendidoId: personaId, ofendidoIdentificacion: personaIdentificacion, CreateOfendido: false, NewCaso: true
             });
+            console.log(this.state.ofendidoIdentificacion);
           }
         };
       })
       .catch(err => {
         console.log(err);
-        this.setState({ listar: false });
       });
   };
 
@@ -395,7 +396,8 @@ class CreateCasoPage extends Component {
               </Form.Row>
 
               <Form.Row className="mb-4">
-                {this.state.imputadoId ?
+                {
+                  this.state.imputadoId &&
                   (
                     <Form.Group as={Row}>
                       <Form.Label className="ml-2 text-center" column sm={6}>
@@ -405,14 +407,33 @@ class CreateCasoPage extends Component {
                         <Form.Control className="text-white bg-dark text-center" defaultValue={this.state.imputadoIdentificacion} />
                       </Col>
                     </Form.Group>
-                  ) : (
-                    <Button className="ml-2 mr-2" as={Col} variant="info" type="button" onClick={this.buscarImputado}>
-                      Cargar Imputado
-                    </Button>
                   )
                 }
+                {
+                  this.state.ImputadoNonData &&
+                  (
+                    <Form.Group as={Row}>
+                      <Form.Label className="ml-2 text-center" column sm={6}>
+                        Sin resultados...
+                            </Form.Label>
+                      <Button className="ml-2 mr-2" column sm={5} variant="info" type="button" onClick={this.crearImputado}>
+                        Crear Imputado
+                      </Button>
+                    </Form.Group>
+                  )
+                }
+                {
+                  !this.state.imputadoId || !this.state.ImputadoNonData (
+                  <Button className="ml-2 mr-2" as={Col} variant="info" type="button" onClick={this.buscarImputado}>
+                    Cargar Imputado
+                  </Button>
+                )
+                }
 
-                {this.state.ofendidoId ?
+
+
+                {
+                  this.state.ofendidoId &&
                   (
                     <Form.Group as={Row}>
                       <Form.Label className="ml-2 text-center" column sm={6}>
@@ -422,10 +443,27 @@ class CreateCasoPage extends Component {
                         <Form.Control className="text-white bg-dark text-center" defaultValue={this.state.ofendidoIdentificacion} />
                       </Col>
                     </Form.Group>
-                  ) : (
+                  )
+                }
+                {
+                  this.state.OfendidoNonData &&
+                  (
+                    <Form.Group as={Row}>
+                      <Form.Label className="ml-2 text-center" column sm={6}>
+                        Sin resultados...
+                            </Form.Label>
+                      <Button className="ml-2 mr-2" column sm={5} variant="info" type="button" onClick={this.crearOfendido}>
+                        Crear Ofendido
+                      </Button>
+                    </Form.Group>
+                  )
+                }
+                
+                {
+                  !this.state.ofendidoId || !this.state.OfendidoNonData (
                     <Button className="ml-2 mr-2" as={Col} variant="info" type="button" onClick={this.buscarOfendido}>
-                  Cargar Ofendido
-                </Button>
+                      Cargar Ofendido
+                    </Button>
                   )
                 }
               </Form.Row>
@@ -461,6 +499,126 @@ class CreateCasoPage extends Component {
             </Form>
 
           </Card>
+        )}
+
+        {this.state.CreateImputado && (
+          <form onSubmit={this.crearPersonaHandler}>
+            <fieldset>
+              <legend>Crear Ppersona</legend>
+
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" ref={this.nombreEl} />
+              </div>
+
+              <div class="form-group">
+                <label>Identificación</label>
+                <input type="text" class="form-control" ref={this.PersonaIdentificacionEl} />
+              </div>
+
+              <div class="form-group">
+                <label>Fecha de nacimiento</label>
+                <input type="date" class="form-control" ref={this.f_nacimientoEl} />
+              </div>
+
+              <div class="form-group">
+                <label>Sexo</label>
+                <select class="form-control" ref={this.sexoEl}>
+                  <option>Masculino</option>
+                  <option>Femenino</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Edad</label>
+                <input type="number" class="form-control" ref={this.edadEl} />
+              </div>
+
+              <div class="form-group">
+                <label>Provincia</label>
+                <input type="text" class="form-control" ref={this.provinciaEl} />
+              </div>
+
+              <div class="form-group">
+                <label>cantón</label>
+                <input type="text" class="form-control" ref={this.cantonEl} />
+              </div>
+
+              <div class="form-group">
+                <label>Distrito</label>
+                <input type="text" class="form-control" ref={this.distritoEl} />
+              </div>
+
+              <div class="form-group">
+                <label for="exampleTextarea">Dirección exacta</label>
+                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+              </div>
+
+
+              <button type="submit" class="btn btn-primary">Guardar Persona</button>
+
+            </fieldset>
+          </form>
+        )}
+
+        {this.state.CreateOfendido && (
+          <form onSubmit={this.crearPersonaHandler}>
+            <fieldset>
+              <legend>Crear Ppersona</legend>
+
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" ref={this.nombreEl} />
+              </div>
+
+              <div class="form-group">
+                <label>Identificación</label>
+                <input type="text" class="form-control" ref={this.PersonaIdentificacionEl} />
+              </div>
+
+              <div class="form-group">
+                <label>Fecha de nacimiento</label>
+                <input type="date" class="form-control" ref={this.f_nacimientoEl} />
+              </div>
+
+              <div class="form-group">
+                <label>Sexo</label>
+                <select class="form-control" ref={this.sexoEl}>
+                  <option>Masculino</option>
+                  <option>Femenino</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Edad</label>
+                <input type="number" class="form-control" ref={this.edadEl} />
+              </div>
+
+              <div class="form-group">
+                <label>Provincia</label>
+                <input type="text" class="form-control" ref={this.provinciaEl} />
+              </div>
+
+              <div class="form-group">
+                <label>cantón</label>
+                <input type="text" class="form-control" ref={this.cantonEl} />
+              </div>
+
+              <div class="form-group">
+                <label>Distrito</label>
+                <input type="text" class="form-control" ref={this.distritoEl} />
+              </div>
+
+              <div class="form-group">
+                <label for="exampleTextarea">Dirección exacta</label>
+                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+              </div>
+
+
+              <button type="submit" class="btn btn-primary">Guardar Persona</button>
+
+            </fieldset>
+          </form>
         )}
       </React.Fragment>
     );
