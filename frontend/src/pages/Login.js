@@ -3,6 +3,14 @@ import React, { Component } from 'react';
 import './Login.css';
 import AuthContext from '../context/auth-context';
 import server from '../components/Variable/Variable';
+import Background from '../img/bgUniforme.jpg';
+
+var d1Style = {
+  backgroundImage: `url(${Background})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'left',
+  backgroundRepeat: 'no-repeat'
+};
 
 class LoginPage extends Component {
   state = {
@@ -76,29 +84,18 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="">
-        <div className="mx-auto">
-          <h1>Login</h1>
+      <div>
+        <div className="d1" style={ d1Style }>
+
         </div>
-        <div>
-          <form className="col-md-4" onSubmit={this.submitHandler}>
-
-            <fieldset>
-              <div className="form-group">
-                <label className="text-right">Identificación:</label>
-                <div className=" ">
-                  <input type="text" className="form-control-plaintext" id="identificacion" placeholder="Formato 101110111" ref={this.identificacionEl} />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label className="text-right">Contraseña:</label>
-                <div className="">
-                  <input type="password" className="form-control-plaintext" id="password" placeholder="Ingrese su contraseña" ref={this.passwordEl} />
-                </div>
-              </div>
-              <button type="submit" className="btn btn-lg btn-block">Ingresar</button>
-            </fieldset>
+        <div className="login">
+          <form className="" onSubmit={this.submitHandler}>
+            <h2>Login</h2>
+            <label htmlFor="identificacion">Identificación:</label>
+            <input className="txtb" type="text" name="identificacion" placeholder="101110111" ref={this.identificacionEl} />
+            <label htmlFor="password">Contraseña:</label>
+            <input className="txtb" type="password" name="password" ref={this.passwordEl} />
+            <button className="btn2" type="submit">Ingresar</button>
           </form>
         </div>
       </div>

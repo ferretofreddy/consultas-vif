@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button, Card, Col } from 'react-bootstrap';
 
-import MainNavigation from '../components/Navigation/MainNavigation';
+import Menu from '../components/Navigation/Menu';
 import CasoList from '../components/Caso/CasoList';
 import InformeList from '../components/Informe/InformeList';
 import AuthContext from '../context/auth-context';
@@ -187,11 +187,11 @@ class FindPersonPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <MainNavigation />
+        <Menu />
         {this.state.selectedCaso && (
-          <Card className="col-lg-10 text-white bg-dark mx-auto mt-5 pb-3">
-            <div className="mt-2 mb-2">
-              <h2 className="text-white">Expediente Judicial N° {this.state.selectedCaso.expediente}</h2>
+          <div className="container">
+            <div className="">
+              <h2 className="">Expediente Judicial N° {this.state.selectedCaso.expediente}</h2>
             </div>
             <Form>
               <Form.Row>
@@ -270,17 +270,17 @@ class FindPersonPage extends Component {
                   <Form.Control readOnly defaultValue={this.state.selectedCaso.cambioDomicilioVict ? ("Víctima cambió de domicilio") : ("Víctima No cambió de domicilio")} />
                 </Form.Group>
               </Form.Row>
-              <Button className="mt-1 mb-1" variant="outline-primary" onClick={this.unselectedCaso}>
+              <Button className="" variant="outline-primary" onClick={this.unselectedCaso}>
                 cerrar
               </Button>
             </Form>
-          </Card>
+          </div>
         )}
 
         {this.state.selectedInforme && (
-          <Card className="col-lg-10 text-white bg-dark mx-auto mt-5 pb-3">
-            <div className="mt-2 mb-2">
-              <h2 className="text-white">Informe Policial N° {this.state.selectedInforme.nInforme}</h2>
+          <div className="container">
+            <div className="">
+              <h2 className="">Informe Policial N° {this.state.selectedInforme.nInforme}</h2>
             </div>
             <Form>
               <Form.Row>
@@ -352,20 +352,20 @@ class FindPersonPage extends Component {
                   <Form.Control readOnly defaultValue={this.state.selectedInforme.casoPorDesovediencia ? ("Es caso por desobediencia") : ("No es caso por desobediencia")} />
                 </Form.Group>
               </Form.Row>
-              <Button className="mt-1 mb-1" variant="outline-primary" onClick={this.unselectedInforme}>
+              <Button className="" variant="" onClick={this.unselectedInforme}>
                 cerrar
               </Button>
             </Form>
-          </Card>
+          </div>
         )}
 
         {this.state.buscar && (
-          <Card className={this.state.listar ? ("col-lg-10 text-white bg-dark mx-auto mt-5") : ("col-lg-6 text-white bg-dark mx-auto mt-5")}>
-            <Card.Header className="col-md-12">
-              <Form className="mx-auto" inline onSubmit={this.submitHandler}>
-                <Form.Label className="col-lg-5 mx-auto"> <h4>Identificación: </h4> </Form.Label><hr></hr>
-                <Form.Control as='input' id="identificacion" type="text" className="mr-sm-2 col-lg-4 mx-auto" ref={this.identificacionEl} />
-                <Button className="col-lg-2 mx-auto" variant="outline-primary" type="submit">
+          <div className="container">
+            <Card.Header className="">
+              <Form className="" inline onSubmit={this.submitHandler}>
+                <Form.Label className=""> <h4>Identificación: </h4> </Form.Label><hr></hr>
+                <Form.Control as='input' type="text" className="" ref={this.identificacionEl} />
+                <Button className="" variant="outline-primary" type="submit">
                   Buscar
             </Button>
               </Form>
@@ -373,7 +373,7 @@ class FindPersonPage extends Component {
             <Card.Body>
               {this.state.listar ? (
                 <div>
-                  <Form className="form-inline">
+                  <Form className="">
 
                     <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
                       <Form.Label>Identificación</Form.Label>
@@ -412,7 +412,7 @@ class FindPersonPage extends Component {
                   </Form>
                   <br />
                   <Card>
-                    <Card.Body className="mx-auto text-dark">
+                    <Card.Body className="">
                       <Card.Title ><h3>Expedientes judiciales asociados</h3></Card.Title>
                       <div className='card-text'>
                         <CasoList
@@ -423,7 +423,7 @@ class FindPersonPage extends Component {
                     </Card.Body>
                   </Card>
                   <Card>
-                    <Card.Body className="mx-auto text-dark">
+                    <Card.Body className="">
                       <Card.Title><h3>Informes policiales asociados</h3></Card.Title>
                       <div className='card-text'>
                         <InformeList
@@ -436,7 +436,7 @@ class FindPersonPage extends Component {
                 </div>
               ) : (<p>No hay datos para esa persona...</p>)}
             </Card.Body>
-          </Card>
+          </div>
         )}
       </React.Fragment>
     );

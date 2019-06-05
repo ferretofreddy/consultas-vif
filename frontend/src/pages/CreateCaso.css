@@ -1,0 +1,54 @@
+.form{
+  width: 100%;
+  height: 100%;
+  background: rgba(220, 73, 58, 1);
+}
+.legend{
+  font-size: 40px;
+  color: rgba(38, 38, 38, 1);
+  font-weight: 600;
+  border-bottom: 3px solid rgba(38, 38, 38, 1);
+}
+.form-group{
+  margin: 10px 0;
+  width: 100%;
+}
+label{
+  display: block;
+  width: 100%;
+}
+label, span{
+
+  color: rgba(38, 38, 38, 1);
+  font-size: 18px;
+  font-weight: 300;
+}
+.txti{
+  width: 95%;
+  margin: 0 auto;
+  margin-left: 2%;
+}
+
+
+@media /* desktop */ (min-width: 769px) {
+  .form{
+    width: 65%;
+    height: 96%;
+    max-width: 600px;
+    margin: 1% auto;
+  }
+  .legend{
+    padding: 10px 0 10px 20px;
+  }
+  .form-group{
+    width: 40%;
+    padding: 0 20px;
+    float: left;
+    height: 50px;
+    margin: 10px 1%;
+  }
+  .txti{
+    float: right;
+    max-width: 220px;
+  }
+}

@@ -3,8 +3,9 @@ import { Form, Button, Card, Col } from 'react-bootstrap';
 
 import './CreateUser.css';
 import AuthContext from '../context/auth-context';
-import MainNavigation from '../components/Navigation/MainNavigation';
+import Menu from '../components/Navigation/Menu';
 import server from '../components/Variable/Variable';
+
 
 class CreateUserPage extends Component {
   state = {
@@ -75,9 +76,9 @@ class CreateUserPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <MainNavigation />
+        <Menu />
 
-        <Card className='col-lg-6 mx-auto mt-5 card text-white bg-dark' border="primary">
+        <div className='container'>
           <Card.Header><h2>Crear nuevo Usuario</h2></Card.Header>
           <Card.Body>
             <Form onSubmit={this.submitHandler} >
@@ -120,7 +121,7 @@ class CreateUserPage extends Component {
             </Button>
             </Form>
           </Card.Body>
-        </Card>
+        </div>
       </React.Fragment>
     );
   }

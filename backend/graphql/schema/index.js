@@ -130,11 +130,11 @@ input UserInput {
 }
 
 type RootQuery {
-  personas: [Persona!]
-  persona(_id: ID!): Persona!
-  buscarPersona(identificacion: String!): Persona!
-  buscarImputado(identificacion: String!): Imputado!
-  buscarOfendido(identificacion: String!): Ofendido!
+  personas: [Persona]
+  persona(_id: ID!): Persona
+  buscarPersona(identificacion: String!): Persona
+  buscarImputado(identificacion: String!): Imputado
+  buscarOfendido(identificacion: String!): Ofendido
   casos: [Caso!]!
   expediente(expediente: String!): Caso!
   juzgado(juzgado: String!): [Caso!]!

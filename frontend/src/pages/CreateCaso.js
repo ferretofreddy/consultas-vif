@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Button, Card, Col, Row } from 'react-bootstrap';
 
-import MainNavigation from '../components/Navigation/MainNavigation';
+import Menu from '../components/Navigation/Menu';
 import AuthContext from '../context/auth-context';
 import server from '../components/Variable/Variable';
 
@@ -203,15 +202,19 @@ class CreateCasoPage extends Component {
           throw new Error('Error de servidor!');
         }
         return res.json();
+
       })
       .then(resData => {
+        console.log(resData);
         if (this.state.FindImputado) {
+
+          if (resData.data.buscarPersona === null) {
+            this.setState({ imputadoId: null, imputadoIdentificacion: null, FindImputado: false, NewCaso: true, ImputadoNonData: true });
+            return;
+          }
+
           const personaId = resData.data.buscarPersona._id;
           const personaIdentificacion = resData.data.buscarPersona.identificacion;
-
-          if (resData === null) {
-            this.setState({ imputadoId: null, imputadoIdentificacion: null, FindImputado: false, ImputadoNonData: true });
-          }
           if (this.isActive) {
             this.setState({
               imputadoId: personaId,
@@ -223,12 +226,14 @@ class CreateCasoPage extends Component {
           }
         };
         if (this.state.FindOfendido) {
+
+          if (resData.data.buscarPersona === null) {
+            this.setState({ ofendidoId: null, ofendidoIdentificacion: null, FindOfendido: false, NewCaso: true, OfendidoNonData: true });
+            return;
+          }
+
           const personaId = resData.data.buscarPersona._id;
           const personaIdentificacion = resData.data.buscarPersona.identificacion;
-
-          if (resData === null) {
-            this.setState({ ofendidoId: null, ofendidoIdentificacion: null, FindOfendido: false, OfendidoNonData: true });
-          }
           if (this.isActive) {
             this.setState({
               ofendidoId: personaId,
@@ -247,21 +252,21 @@ class CreateCasoPage extends Component {
 
   crearImputado = event => {
     event.preventDefault();
-    this.setState({ CreateImputado: true, ImputadoNonData: false });
+    this.setState({ CreateImputado: true, ImputadoNonData: false, NewCaso: false });
   };
 
   crearOfendido = event => {
     event.preventDefault();
-    this.setState({ CreateOfendido: true, OfendidoNonData: false });
+    this.setState({ CreateOfendido: true, OfendidoNonData: false, NewCaso: false });
   };
 
   crearPersonaHandler = event => {
     event.preventDefault();
     const nombre = this.nombreEl.current.value;
     const PersonaIdentificacion = this.PersonaIdentificacionEl.current.value;
-    const f_nacimiento = this.f_nacimientoEl.current.value;
+    const f_nacimiento = new Date(this.f_nacimientoEl.current.value).toISOString();
     const sexo = this.sexoEl.current.value;
-    const edad = this.edadEl.current.value;
+    const edad = +this.edadEl.current.value;
     const provincia = this.provinciaEl.current.value;
     const canton = this.cantonEl.current.value;
     const distrito = this.distritoEl.current.value;
@@ -352,273 +357,219 @@ class CreateCasoPage extends Component {
   };
 
   render() {
+    const datoImputado = this.state.imputadoId;
+    const sinResultado = this.state.ImputadoNonData;
+    let campoImputado;
+    if (datoImputado !== null) {
+      campoImputado = <div className="">
+        <label className="">Identificacion del imputado:</label>
+        <input className="" defaultValue={this.state.imputadoIdentificacion} />
+      </div>
+    }
+    else if (sinResultado) {
+      campoImputado = <div className="">
+        <label className="">Sin resultados...</label>
+        <button className="" onClick={this.crearImputado}>Crear Imputado</button>
+      </div>
+    }
+    else {
+      campoImputado = <button className="" onClick={this.buscarImputado}>Cargar Imputado</button>
+    }
+
+    const datoOfendido = this.state.ofendidoId;
+    const sinResultado1 = this.state.OfendidoNonData;
+    let campoOfendido;
+    if (datoOfendido !== null) {
+      campoOfendido = <div className="">
+        <label className="">Identificacion del ofendido:</label>
+        <input className="" defaultValue={this.state.ofendidoIdentificacion} />
+      </div>
+    } else if (sinResultado1) {
+      campoOfendido = <div className="">
+        <label className="">Sin resultados...</label>
+        <button className="" type="button" onClick={this.crearOfendido}>Crear Ofendido</button>
+      </div>
+    } else {
+      campoOfendido = <button className="" onClick={this.buscarOfendido}>Cargar Ofendido</button>
+    }
+
     return (
       <React.Fragment>
-        <MainNavigation />
+        <Menu />
         {this.state.NewCaso && (
-          <Card className="col-lg-10 text-white bg-dark mx-auto mt-5 pb-3">
-            <Form onSubmit={this.crearCasoHandler}>
-              <Form.Row>
-                <Form.Group as={Col}>
-                  <Form.Label>Expediente</Form.Label>
-                  <Form.Control as='input' id="expediente" type="text" ref={this.expedienteEl} />
-                </Form.Group>
+          <div className="container">
+            <form className="form" onSubmit={this.crearCasoHandler}>
+              <legend className="legend">Crear Caso</legend>
+              <div className="form-group">
+                <label className="">Expediente</label>
+                <input className="txti" type="text" ref={this.expedienteEl} />
+              </div>
+              <div className="form-group">
+                <label className="">Juzgado</label>
+                <input className="txti" type="text" ref={this.juzgadoEl} />
+              </div>
+              <div className="form-group">
+                <input className="chk" type="checkbox" label="Desalojo del imputado" ref={this.desalojoEl} />
+                <span className="">Desalojo del imputado</span>
+              </div>
+              <div className="form-group">
+                <input className="chk" type="checkbox" label="Cambio de domicilio de víctima" ref={this.cambioDomicilioVictEl} />
+                <span className="">Cambio de domicilio de víctima</span>
+              </div>
+              <div className="form-group">
+                <input className="chk" type="checkbox" label="Notificación del imputado" ref={this.notifImputadoEl} />
+                <span className="">Notificación del imputado</span>
+              </div>
+              <div className="form-group">
+                <label className="">Fecha de notificación del imputado</label>
+                <input className="txti" type="date" ref={this.f_notifImputadoEl} />
+              </div>
 
-                <Form.Group as={Col}>
-                  <Form.Label>Juzgado</Form.Label>
-                  <Form.Control as='input' id="juzgado" type="text" ref={this.juzgadoEl} />
-                </Form.Group>
-
-                <Form.Group className="mt-4 pb-3" as={Col}>
-                  <Form.Check className="ml-2" type="checkbox" label="Desalojo del imputado" ref={this.desalojoEl} />
-                  <Form.Check className="ml-2" type="checkbox" label="Cambio de domicilio de víctima" ref={this.cambioDomicilioVictEl} />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col}>
-                  <Form.Check className="ml-2 pb-2" type="checkbox" label="Notificación del imputado" ref={this.notifImputadoEl} />
-                  <Form.Label className="ml-2">Fecha de notificación del imputado</Form.Label>
-                  <Form.Control as='input' id="f_notifImputado" type="date" ref={this.f_notifImputadoEl} />
-                </Form.Group>
-
-                <Form.Group as={Col}>
-                  <Form.Check className="ml-2 pb-2" type="checkbox" label="Notificación del ofendido" ref={this.notifOfendidoEl} />
-                  <Form.Label className="ml-2">Fecha de notificación del ofendido</Form.Label>
-                  <Form.Control as='input' id="f_notifOfendido" type="date" ref={this.f_notifOfendidoEl} />
-                </Form.Group>
-
-                <Form.Group as={Col}>
-                  <Form.Check className="ml-2 pb-2" type="checkbox" label="Medidas de protección" ref={this.medidasProteccionEl} />
-                  <Form.Label className="ml-2">Fecha de emisión de las medidas</Form.Label>
-                  <Form.Control as='input' id="f_emisionMedidas" type="date" ref={this.f_emisionMedidasEl} />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row className="mb-4">
-                {
-                  this.state.imputadoId &&
-                  (
-                    <Form.Group as={Row}>
-                      <Form.Label className="ml-2 text-center" column sm={6}>
-                        Identificacion del imputado:
-                      </Form.Label>
-                      <Col sm={5}>
-                        <Form.Control className="text-white bg-dark text-center" defaultValue={this.state.imputadoIdentificacion} />
-                      </Col>
-                    </Form.Group>
-                  )
-                }
-                {
-                  this.state.ImputadoNonData &&
-                  (
-                    <Form.Group as={Row}>
-                      <Form.Label className="ml-2 text-center" column sm={6}>
-                        Sin resultados...
-                            </Form.Label>
-                      <Button className="ml-2 mr-2" column sm={5} variant="info" type="button" onClick={this.crearImputado}>
-                        Crear Imputado
-                      </Button>
-                    </Form.Group>
-                  )
-                }
-                {
-                  !this.state.imputadoId || !this.state.ImputadoNonData (
-                  <Button className="ml-2 mr-2" as={Col} variant="info" type="button" onClick={this.buscarImputado}>
-                    Cargar Imputado
-                  </Button>
-                )
-                }
-
-
-
-                {
-                  this.state.ofendidoId &&
-                  (
-                    <Form.Group as={Row}>
-                      <Form.Label className="ml-2 text-center" column sm={6}>
-                        Identificacion del ofendido:
-                      </Form.Label>
-                      <Col sm={5}>
-                        <Form.Control className="text-white bg-dark text-center" defaultValue={this.state.ofendidoIdentificacion} />
-                      </Col>
-                    </Form.Group>
-                  )
-                }
-                {
-                  this.state.OfendidoNonData &&
-                  (
-                    <Form.Group as={Row}>
-                      <Form.Label className="ml-2 text-center" column sm={6}>
-                        Sin resultados...
-                            </Form.Label>
-                      <Button className="ml-2 mr-2" column sm={5} variant="info" type="button" onClick={this.crearOfendido}>
-                        Crear Ofendido
-                      </Button>
-                    </Form.Group>
-                  )
-                }
-                
-                {
-                  !this.state.ofendidoId || !this.state.OfendidoNonData (
-                    <Button className="ml-2 mr-2" as={Col} variant="info" type="button" onClick={this.buscarOfendido}>
-                      Cargar Ofendido
-                    </Button>
-                  )
-                }
-              </Form.Row>
-
-              <Button className="ml-2 mr-2" variant="primary" type="submit">
-                Guardar
-                </Button>
-            </Form>
-          </Card>
+              <div className="form-group">
+                <input className="chk" type="checkbox" label="Notificación del ofendido" ref={this.notifOfendidoEl} />
+                <span className="">Notificación del ofendido</span>
+              </div>
+              <div className="form-group">
+                <label className="">Fecha de notificación del ofendido</label>
+                <input className="txti" type="date" ref={this.f_notifOfendidoEl} />
+              </div>
+              <div className="form-group">
+                <input className="chk" type="checkbox" label="Medidas de protección" ref={this.medidasProteccionEl} />
+                <span className="">Medidas de protección</span>
+              </div>
+              <div className="form-group">
+                <label className="">Fecha de emisión de las medidas</label>
+                <input className="txti" type="date" ref={this.f_emisionMedidasEl} />
+              </div>
+              <div className="form-group">
+                {campoImputado}
+              </div>
+              <div className="form-group">
+                {campoOfendido}
+              </div>
+              <div className="form-group">
+                <button className="submit-btn" type="submit">Guardar</button>
+              </div>
+            </form>
+          </div>
         )}
 
         {this.state.FindImputado && (
-          <Card>
-            <Form className="mx-auto" inline onSubmit={this.buscarPersonaHandler}>
-              <Form.Label className="col-lg-5 mx-auto"> <h4>Ingrese identificación del imputado: </h4> </Form.Label><hr></hr>
-              <Form.Control as='input' id="identificacion" type="text" className="mr-sm-2 col-lg-4 mx-auto" ref={this.PersonaIdentificacionEl} />
-              <Button className="col-lg-2 mx-auto" variant="outline-primary" type="submit">
-                Buscar
-            </Button>
-            </Form>
-
-          </Card>
+          <div className="container">
+            <form className="" onSubmit={this.buscarPersonaHandler}>
+              <legend className="">Buscar Imputado</legend>
+              <label className=""><h4>Ingrese identificación del imputado:</h4></label><hr></hr>
+              <input type="text" className="" ref={this.PersonaIdentificacionEl} />
+              <button className="" type="submit">Buscar</button>
+            </form>
+          </div>
         )}
 
         {this.state.FindOfendido && (
-          <Card>
-            <Form className="mx-auto" inline onSubmit={this.buscarPersonaHandler}>
-              <Form.Label className="col-lg-5 mx-auto"> <h4>Ingrese identificación del ofendido: </h4> </Form.Label><hr></hr>
-              <Form.Control as='input' id="identificacion" type="text" className="mr-sm-2 col-lg-4 mx-auto" ref={this.PersonaIdentificacionEl} />
-              <Button className="col-lg-2 mx-auto" variant="outline-primary" type="submit">
-                Buscar
-            </Button>
-            </Form>
-
-          </Card>
+          <div className="container">
+            <form className="" onSubmit={this.buscarPersonaHandler}>
+              <legend className="">Buscar Ofendido</legend>
+              <label className=""><h4>Ingrese identificación del ofendido:</h4></label><hr></hr>
+              <input type="text" className="" ref={this.PersonaIdentificacionEl} />
+              <button className="" type="submit">Buscar</button>
+            </form>
+          </div>
         )}
 
         {this.state.CreateImputado && (
-          <form onSubmit={this.crearPersonaHandler}>
-            <fieldset>
-              <legend>Crear Ppersona</legend>
-
-              <div class="form-group">
+          <div className="container">
+            <form className="" onSubmit={this.crearPersonaHandler}>
+              <legend className="">Crear Imputado</legend>
+              <div className="">
                 <label>Nombre</label>
-                <input type="text" class="form-control" ref={this.nombreEl} />
+                <input type="text" className="" ref={this.nombreEl} />
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>Identificación</label>
-                <input type="text" class="form-control" ref={this.PersonaIdentificacionEl} />
+                <input type="text" className="" ref={this.PersonaIdentificacionEl} />
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>Fecha de nacimiento</label>
-                <input type="date" class="form-control" ref={this.f_nacimientoEl} />
+                <input type="date" className="" ref={this.f_nacimientoEl} />
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>Sexo</label>
-                <select class="form-control" ref={this.sexoEl}>
+                <select className="" ref={this.sexoEl}>
                   <option>Masculino</option>
                   <option>Femenino</option>
                 </select>
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>Edad</label>
-                <input type="number" class="form-control" ref={this.edadEl} />
+                <input type="number" className="" ref={this.edadEl} />
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>Provincia</label>
-                <input type="text" class="form-control" ref={this.provinciaEl} />
+                <input type="text" className="" ref={this.provinciaEl} />
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>cantón</label>
-                <input type="text" class="form-control" ref={this.cantonEl} />
+                <input type="text" className="" ref={this.cantonEl} />
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>Distrito</label>
-                <input type="text" class="form-control" ref={this.distritoEl} />
+                <input type="text" className="" ref={this.distritoEl} />
               </div>
-
-              <div class="form-group">
-                <label for="exampleTextarea">Dirección exacta</label>
-                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+              <div className="">
+                <label>Dirección exacta</label>
+                <textarea className="" ref={this.direccionEl} />
               </div>
-
-
-              <button type="submit" class="btn btn-primary">Guardar Persona</button>
-
-            </fieldset>
-          </form>
+              <button type="submit" className="">Guardar Persona</button>
+            </form>
+          </div>
         )}
 
         {this.state.CreateOfendido && (
-          <form onSubmit={this.crearPersonaHandler}>
-            <fieldset>
-              <legend>Crear Ppersona</legend>
-
-              <div class="form-group">
+          <div className="container">
+            <form className="" onSubmit={this.crearPersonaHandler}>
+              <legend className="">Crear Ofendido</legend>
+              <div className="">
                 <label>Nombre</label>
-                <input type="text" class="form-control" ref={this.nombreEl} />
+                <input type="text" className="" ref={this.nombreEl} />
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>Identificación</label>
-                <input type="text" class="form-control" ref={this.PersonaIdentificacionEl} />
+                <input type="text" className="" ref={this.PersonaIdentificacionEl} />
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>Fecha de nacimiento</label>
-                <input type="date" class="form-control" ref={this.f_nacimientoEl} />
+                <input type="date" className="" ref={this.f_nacimientoEl} />
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>Sexo</label>
-                <select class="form-control" ref={this.sexoEl}>
+                <select className="" ref={this.sexoEl}>
                   <option>Masculino</option>
                   <option>Femenino</option>
                 </select>
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>Edad</label>
-                <input type="number" class="form-control" ref={this.edadEl} />
+                <input type="number" className="" ref={this.edadEl} />
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>Provincia</label>
-                <input type="text" class="form-control" ref={this.provinciaEl} />
+                <input type="text" className="" ref={this.provinciaEl} />
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>cantón</label>
-                <input type="text" class="form-control" ref={this.cantonEl} />
+                <input type="text" className="" ref={this.cantonEl} />
               </div>
-
-              <div class="form-group">
+              <div className="">
                 <label>Distrito</label>
-                <input type="text" class="form-control" ref={this.distritoEl} />
+                <input type="text" className="" ref={this.distritoEl} />
               </div>
-
-              <div class="form-group">
-                <label for="exampleTextarea">Dirección exacta</label>
-                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+              <div className="">
+                <label>Dirección exacta</label>
+                <textarea className="" ref={this.direccionEl} />
               </div>
-
-
-              <button type="submit" class="btn btn-primary">Guardar Persona</button>
-
-            </fieldset>
-          </form>
+              <button type="submit" className="">Guardar Persona</button>
+            </form>
+          </div>
         )}
       </React.Fragment>
     );
