@@ -119,6 +119,8 @@ input InformeInput {
   trasladoFiscalia: Boolean
   primerizo: Boolean
   casoPorDesovediencia: Boolean
+  imputado: String!
+  ofendido: String!
 }
 
 input UserInput {

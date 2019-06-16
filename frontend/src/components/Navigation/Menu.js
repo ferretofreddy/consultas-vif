@@ -28,6 +28,7 @@ const Menu = props => (
               <div className="menu-links">
               <React.Fragment>
                 <NavLink className="menu-item" to="/createcaso">Crear Caso</NavLink>
+                <NavLink className="menu-item" to="/createinforme">Crear Informe</NavLink>
                 <NavLink className="menu-item" to="/findperson">Buscar Persona</NavLink>
                 <NavLink className="menu-item" to="/newuser">Crear Usuario</NavLink>
                 <button className="menu-btn" type="submit" onClick={context.logout}>Cerrar Sesión</button>

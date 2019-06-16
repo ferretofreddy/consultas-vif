@@ -4,12 +4,12 @@ import Menu from '../components/Navigation/Menu';
 import AuthContext from '../context/auth-context';
 import server from '../components/Variable/Variable';
 
-import './CreateCaso.css';
+import './CreateInforme.css';
 
-class CreateCasoPage extends Component {
+class CreateInformePage extends Component {
   state = {
     server: server.server,
-    NewCaso: true,
+    NewInforme: true,
     FindImputado: false,
     CreateImputado: false,
     ImputadoNonData: false,
@@ -21,16 +21,18 @@ class CreateCasoPage extends Component {
     imputadoIdentificacion: null,
     ofendidoId: null,
     ofendidoIdentificacion: null,
-    expedienteId: null,
-    expediente: null,
-    juzgado: null,
+    nInforme: null,
+    f_informe: null,
     imputadoNombre: null,
     ofendidoNombre: null,
-    desalojoCh: false,
-    cambioDomicilioCh: false,
-    notifImputadoCh: false,
-    notifOfendidoCh: false,
-    medidasCh: false
+// checkBoxs del formulario
+    aprehendidoCh:false,
+    casoCLAISCh:false,
+    decA_BlancaCh:false,
+    decA_FuegoCh:false,
+    trasladoFiscaliaCh:false,
+    primerizoCh:false,
+    casoPorDesovedienciaCh:false
   };
 
   isActive = true;
@@ -39,13 +41,8 @@ class CreateCasoPage extends Component {
 
   constructor(props) {
     super(props);
-    this.expedienteEl = React.createRef();
-    this.juzgadoEl = React.createRef();
-    this.f_notifImputadoEl = React.createRef();
-    this.f_notifOfendidoEl = React.createRef();
-    this.f_emisionMedidasEl = React.createRef();
-    this.imputadoIdentificacionEl = React.createRef();
-    this.ofendidoIdentificacionEl = React.createRef();
+    this.nInformeEl = React.createRef();
+    this.f_informeEl = React.createRef();
     this.nombreEl = React.createRef();
     this.PersonaIdentificacionEl = React.createRef();
     this.f_nacimientoEl = React.createRef();
@@ -58,93 +55,104 @@ class CreateCasoPage extends Component {
 
   }
     // modificar estados de los checkbox
-  cambioDesalojo = () => {
+  cambioAprehendido = () => {
     this.setState({
-      desalojoCh: !this.state.desalojoCh,
+      aprehendidoCh: !this.state.aprehendidoCh,
     });
-    console.log(this.state.desalojoCh);
+    console.log(this.state.aprehendidoCh);
   }
   
-  cambioDomicilio = () => {
+  cambioCasoCLAIS = () => {
     this.setState({
-      cambioDomicilioCh: !this.state.cambioDomicilioCh,
-    });
-  }
-  
-  cambioImputado = () => {
-    this.setState({
-      notifImputadoCh: !this.state.notifImputadoCh,
+      casoCLAISCh: !this.state.casoCLAISCh,
     });
   }
   
-  cambioOfendido = () => {
+  cambioDecA_Blanca = () => {
     this.setState({
-      notifOfendidoCh: !this.state.notifOfendidoCh,
+      decA_BlancaCh: !this.state.decA_BlancaCh,
     });
   }
   
-  cambioMedidas = () => {
+  cambioDecA_Fuego = () => {
     this.setState({
-      medidasCh: !this.state.medidasCh,
+      decA_FuegoCh: !this.state.decA_FuegoCh,
     });
   }
-    // Cambiar estado de nuevo caso
-  nuevoCaso = event => {
+  
+  cambioTrasladoFiscalia = () => {
+    this.setState({
+      trasladoFiscaliaCh: !this.state.trasladoFiscaliaCh,
+    });
+  }
+
+  cambioPrimerizo = () => {
+    this.setState({
+      primerizoCh: !this.state.primerizoCh,
+    });
+  }
+
+  cambioCasoPorDesovediencia = () => {
+    this.setState({
+      casoPorDesovedienciaCh: !this.state.casoPorDesovedienciaCh,
+    });
+  }
+    // Manejador de eventos Nuevo informe para crear nuevo informe
+  nuevoInforme = event => {
     event.preventDefault();
     this.setState({ 
       Result: false,
-      NewCaso: true,
+      NewInforme: true,
       imputadoId: null,
       imputadoIdentificacion: null,
       ofendidoId: null,
       ofendidoIdentificacion: null,
-      desalojoCh: false,
-      cambioDomicilioCh: false,
-      notifImputadoCh: false,
-      notifOfendidoCh: false,
-      medidasCh: false
+      aprehendidoCh:false,
+      casoCLAISCh:false,
+      decA_BlancaCh:false,
+      decA_FuegoCh:false,
+      trasladoFiscaliaCh:false,
+      primerizoCh:false,
+      casoPorDesovedienciaCh:false
     });
   };
 
     // Manejador de eventos Crear Caso Query
-  crearCasoHandler = event => {
+  CrearInformeHandler = event => {
     event.preventDefault();
-    const expediente = this.expedienteEl.current.value;
-    const juzgado = this.juzgadoEl.current.value;
-    const notifImputado = this.state.notifImputadoCh;
-    const f_notifImputado = this.f_notifImputadoEl.current.value;
-    const notifOfendido = this.state.notifOfendidoCh;
-    const f_notifOfendido = this.f_notifOfendidoEl.current.value;
-    const desalojo = this.state.desalojoCh;
-    const cambioDomicilioVict = this.state.cambioDomicilioCh;
-    const medidasProteccion = this.state.medidasCh;
-    const f_emisionMedidas = this.f_emisionMedidasEl.current.value;
+    const nInforme = this.nInformeEl.current.value;
+    const f_informe = this.f_informeEl.current.value;
+    const aprehendido = this.state.aprehendidoCh;
+    const casoCLAIS = this.state.casoCLAISCh;
+    const decA_Blanca = this.state.decA_BlancaCh;
+    const decA_Fuego = this.state.decA_FuegoCh;
+    const trasladoFiscalia = this.state.trasladoFiscaliaCh;
+    const primerizo = this.state.primerizoCh;
+    const casoPorDesovediencia = this.state.casoPorDesovedienciaCh;
     const imputado = this.state.imputadoId;
     const ofendido = this.state.ofendidoId;
 
 
-    if (expediente.trim().length === 0 || juzgado.trim().length === 0 || imputado.trim().length === 0 || ofendido.trim().length === 0) {
+    if (nInforme.trim().length === 0 || f_informe.trim().length === 0 || imputado.trim().length === 0 || ofendido.trim().length === 0) {
       return;
     }
 
-    this.setState({ NewCaso: false });
+    this.setState({ NewInforme: false });
     console.log(imputado);
     console.log(ofendido);
-    console.log(desalojo);
 
     const requestBody = {
       query: `
-          mutation CrearCaso($expediente: String!, $juzgado: String!, $notifImputado: Boolean, $f_notifImputado: String, $notifOfendido: Boolean, $f_notifOfendido: String, $desalojo: Boolean, $cambioDomicilioVict: Boolean, $medidasProteccion: Boolean, $f_emisionMedidas: String, $imputado: String!, $ofendido: String!) {
-            crearCaso(casoInput:{expediente: $expediente, juzgado: $juzgado, notifImputado: $notifImputado, f_notifImputado: $f_notifImputado, notifOfendido: $notifOfendido, f_notifOfendido: $f_notifOfendido, desalojo: $desalojo, cambioDomicilioVict: $cambioDomicilioVict, medidasProteccion: $medidasProteccion,f_emisionMedidas: $f_emisionMedidas, imputado: $imputado, ofendido: $ofendido})
+          mutation CrearInforme($nInforme: String!, $f_informe: String!, $aprehendido: Boolean, $casoCLAIS: Boolean, $decA_Blanca: Boolean, $decA_Fuego: Boolean, $trasladoFiscalia: Boolean, $primerizo: Boolean, $casoPorDesovediencia: Boolean, $imputado: String!, $ofendido: String!) {
+            crearInforme(informeInput:{nInforme: $nInforme, f_informe: $f_informe, aprehendido: $aprehendido, casoCLAIS: $casoCLAIS, decA_Blanca: $decA_Blanca, decA_Fuego: $decA_Fuego, trasladoFiscalia: $trasladoFiscalia, primerizo: $primerizo, casoPorDesovediencia: $casoPorDesovediencia,  imputado: $imputado, ofendido: $ofendido})
             {
-              _id
-              expediente
-              juzgado
-              imputado{
+              nInforme
+              f_informe
+              ofendido{
                 nombre
                 identificacion
               }
-              ofendido{
+              imputado{
                 nombre
                 identificacion
               }
@@ -153,16 +161,15 @@ class CreateCasoPage extends Component {
         `,
 
       variables: {
-        expediente: expediente,
-        juzgado: juzgado,
-        notifImputado: notifImputado,
-        f_notifImputado: f_notifImputado, // Verificar si almacena en DB el formato ISOString
-        notifOfendido: notifOfendido,
-        f_notifOfendido: f_notifOfendido,
-        desalojo: desalojo,
-        cambioDomicilioVict: cambioDomicilioVict,
-        medidasProteccion: medidasProteccion,
-        f_emisionMedidas: f_emisionMedidas,
+        nInforme: nInforme,
+        f_informe: new Date(f_informe).toISOString(),
+        aprehendido: aprehendido,
+        casoCLAIS: casoCLAIS,
+        decA_Blanca: decA_Blanca,
+        decA_Fuego: decA_Fuego,
+        trasladoFiscalia: trasladoFiscalia,
+        primerizo: primerizo,
+        casoPorDesovediencia: casoPorDesovediencia,
         imputado: imputado,
         ofendido: ofendido
       }
@@ -185,24 +192,22 @@ class CreateCasoPage extends Component {
         return res.json();
       })
       .then(resData => {
-        const expedienteId = resData.data.crearCaso._id;
-        const expediente = resData.data.crearCaso.expediente;
-        const juzgado = resData.data.crearCaso.juzgado;
-        const imputadoNombre = resData.data.crearCaso.imputado.nombre;
-        const ofendidoNombre = resData.data.crearCaso.ofendido.nombre;
+        const nInforme = resData.data.crearInforme.nInforme;
+        const f_informe = resData.data.crearInforme.f_informe;
+        const imputadoNombre = resData.data.crearInforme.imputado.nombre;
+        const ofendidoNombre = resData.data.crearInforme.ofendido.nombre;
         console.log(imputadoNombre);
         if (resData === null) {
           this.setState({ Result: false });
         }
         if (this.isActive) {
           this.setState({
-            expedienteId: expedienteId,
-            expediente: expediente,
-            juzgado: juzgado,
+            nInforme: nInforme,
+            f_informe: f_informe,
             imputadoNombre: imputadoNombre,
             ofendidoNombre: ofendidoNombre,
             Result: true,
-            NewCaso: false
+            NewInforme: false
           });
         }
         console.log(this.state.imputadoNombre);
@@ -216,13 +221,13 @@ class CreateCasoPage extends Component {
     // Modificador de estado en click buscar Imputado
   buscarImputado = event => {
     event.preventDefault();
-    this.setState({ FindImputado: true, NewCaso: false });
+    this.setState({ FindImputado: true, NewInforme: false });
   };
 
       // Modificador de estado en click buscar Ofendido
   buscarOfendido = event => {
     event.preventDefault();
-    this.setState({ FindOfendido: true, NewCaso: false });
+    this.setState({ FindOfendido: true, NewInforme: false });
   };
 
     // Manejador de eventos para buscar personas Query
@@ -267,7 +272,7 @@ class CreateCasoPage extends Component {
         if (this.state.FindImputado) {
 
           if (resData.data.buscarPersona === null) {
-            this.setState({ imputadoId: null, imputadoIdentificacion: null, FindImputado: false, NewCaso: true, ImputadoNonData: true });
+            this.setState({ imputadoId: null, imputadoIdentificacion: null, FindImputado: false, NewInforme: true, ImputadoNonData: true });
             return;
           }
 
@@ -277,7 +282,7 @@ class CreateCasoPage extends Component {
             this.setState({
               imputadoId: personaId,
               imputadoIdentificacion: personaIdentificacion,
-              NewCaso: true,
+              NewInforme: true,
               FindImputado: false
             });
             console.log(this.state.imputadoIdentificacion);
@@ -286,7 +291,7 @@ class CreateCasoPage extends Component {
         if (this.state.FindOfendido) {
 
           if (resData.data.buscarPersona === null) {
-            this.setState({ ofendidoId: null, ofendidoIdentificacion: null, FindOfendido: false, NewCaso: true, OfendidoNonData: true });
+            this.setState({ ofendidoId: null, ofendidoIdentificacion: null, FindOfendido: false, NewInforme: true, OfendidoNonData: true });
             return;
           }
 
@@ -296,7 +301,7 @@ class CreateCasoPage extends Component {
             this.setState({
               ofendidoId: personaId,
               ofendidoIdentificacion: personaIdentificacion,
-              NewCaso: true,
+              NewInforme: true,
               FindOfendido: false
             });
             console.log(this.state.ofendidoIdentificacion);
@@ -311,13 +316,13 @@ class CreateCasoPage extends Component {
         // Modificador de estado en click Crear Imputado
   crearImputado = event => {
     event.preventDefault();
-    this.setState({ CreateImputado: true, ImputadoNonData: false, NewCaso: false });
+    this.setState({ CreateImputado: true, ImputadoNonData: false, NewInforme: false });
   };
 
         // Modificador de estado en click Crear Ofendido
   crearOfendido = event => {
     event.preventDefault();
-    this.setState({ CreateOfendido: true, OfendidoNonData: false, NewCaso: false });
+    this.setState({ CreateOfendido: true, OfendidoNonData: false, NewInforme: false });
   };
 
         // Manejador de eventos para crear persona Query
@@ -388,7 +393,7 @@ class CreateCasoPage extends Component {
           }
           if (this.isActive) {
             this.setState({
-              imputadoId: personaId, imputadoIdentificacion: personaIdentificacion, CreateImputado: false, NewCaso: true
+              imputadoId: personaId, imputadoIdentificacion: personaIdentificacion, CreateImputado: false, NewInforme: true
             });
             console.log(this.state.imputadoIdentificacion);
           }
@@ -402,7 +407,7 @@ class CreateCasoPage extends Component {
           }
           if (this.isActive) {
             this.setState({
-              ofendidoId: personaId, ofendidoIdentificacion: personaIdentificacion, CreateOfendido: false, NewCaso: true
+              ofendidoId: personaId, ofendidoIdentificacion: personaIdentificacion, CreateOfendido: false, NewInforme: true
             });
             console.log(this.state.ofendidoIdentificacion);
           }
@@ -459,10 +464,10 @@ class CreateCasoPage extends Component {
     return (
       <React.Fragment>
         <Menu />
-        {this.state.NewCaso && (
+        {this.state.NewInforme && (
           <div className="container">
-            <form className="form" onSubmit={this.crearCasoHandler}>
-              <legend className="legend">Nuevo Expediente Judicial</legend>
+            <form className="form" onSubmit={this.CrearInformeHandler}>
+              <legend className="legend">Nuevo Informe Policial</legend>
               <div className="form-group">
                 {campoImputado}
               </div>
@@ -470,45 +475,40 @@ class CreateCasoPage extends Component {
                 {campoOfendido}
               </div>
               <div className="form-group">
-                <label className="">Expediente</label>
-                <input className="txti" type="text" ref={this.expedienteEl} />
+                <label className="">Informe Policial</label>
+                <input className="txti" type="text" ref={this.nInformeEl} />
               </div>
               <div className="form-group">
-                <label className="">Juzgado</label>
-                <input className="txti" type="text" ref={this.juzgadoEl} />
+                <label className="">Fecha del Informe</label>
+                <input className="txti" type="date" ref={this.f_informeEl} />
               </div>
               <div className="form-group">
-                <input checked={this.state.desalojoCh} onChange={this.cambioDesalojo} className="chk" type="checkbox" label="Desalojo del imputado" />
-                <span className="">Desalojo del imputado</span>
+                <input checked={this.state.aprehendidoCh} onChange={this.cambioAprehendido} className="chk" type="checkbox" label="Imputado es aprehendido" />
+                <span className="">Imputado es aprehendido</span>
               </div>
               <div className="form-group">
-                <input checked={this.state.cambioDomicilioCh} onChange={this.cambioDomicilio} className="chk" type="checkbox" label="Cambio de domicilio de víctima" />
-                <span className="">Cambio de domicilio de víctima</span>
+                <input checked={this.state.casoCLAISCh} onChange={this.cambioCasoCLAIS} className="chk" type="checkbox" label="Es caso CLAIS" />
+                <span className="">Es caso CLAIS</span>
               </div>
               <div className="form-group">
-                <input checked={this.state.notifImputadoCh} onChange={this.cambioImputado}  className="chk" type="checkbox" label="Notificación del imputado" />
-                <span className="">Notificación del imputado</span>
+                <input checked={this.state.decA_BlancaCh} onChange={this.cambioDecA_Blanca}  className="chk" type="checkbox" label="Decomiso de arma blanca" />
+                <span className="">Decomiso de arma blanca</span>
               </div>
               <div className="form-group">
-                <label className="">Fecha de notificación del imputado</label>
-                <input className="txti" type="date" ref={this.f_notifImputadoEl} />
-              </div>
-
-              <div className="form-group">
-                <input checked={this.state.notifOfendidoCh} onChange={this.cambioOfendido} className="chk" type="checkbox" label="Notificación del ofendido" />
-                <span className="">Notificación del ofendido</span>
+                <input checked={this.state.decA_FuegoCh} onChange={this.cambioDecA_Fuego} className="chk" type="checkbox" label="Decomiso de arma de fuego" />
+                <span className="">Decomiso de arma de fuego</span>
               </div>
               <div className="form-group">
-                <label className="">Fecha de notificación del ofendido</label>
-                <input className="txti" type="date" ref={this.f_notifOfendidoEl} />
+                <input checked={this.state.trasladoFiscaliaCh} onChange={this.cambioTrasladoFiscalia} className="chk" type="checkbox" label="Imputado trasladado a fiscalia"  />
+                <span className="">Imputado trasladado a fiscalia</span>
               </div>
               <div className="form-group">
-                <input checked={this.state.medidasCh} onChange={this.cambioMedidas} className="chk" type="checkbox" label="Medidas de protección"  />
-                <span className="">Medidas de protección</span>
+                <input checked={this.state.primerizoCh} onChange={this.cambioPrimerizo}  className="chk" type="checkbox" label="Es primerizo" />
+                <span className="">Es primerizo</span>
               </div>
               <div className="form-group">
-                <label className="">Fecha de emisión de las medidas</label>
-                <input className="txti" type="date" ref={this.f_emisionMedidasEl} />
+                <input checked={this.state.casoPorDesovedienciaCh} onChange={this.cambioCasoPorDesovediencia}  className="chk" type="checkbox" label="Es caso por desobediencia" />
+                <span className="">Es caso por desobediencia</span>
               </div>
               
               <button className="submit-btn" type="submit">Guardar</button>
@@ -641,8 +641,8 @@ class CreateCasoPage extends Component {
           <div className="container">
           <form className="form">
           <div className="form-group">
-        <label className="">Datos guardados...</label>
-        <button className="btn" onClick={this.nuevoCaso}>Crear Caso</button>
+        <label className="">El informe {this.state.nInforme}, ha sido guardado...</label>
+        <button className="btn" onClick={this.nuevoInforme}>Crear Informe</button>
       </div>
       </form>
       </div>
@@ -652,4 +652,4 @@ class CreateCasoPage extends Component {
   }
 }
 
-export default CreateCasoPage;
+export default CreateInformePage;

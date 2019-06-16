@@ -18,6 +18,7 @@ const casoList = props => {
       />
     );
     
+    
   });
   return (
   <Table className="striped bordered">

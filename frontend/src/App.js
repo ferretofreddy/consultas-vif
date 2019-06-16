@@ -5,6 +5,7 @@ import LoginPage from './pages/Login';
 import CreateUserPage from './pages/CreateUser';
 import FindPersonPage from './pages/FindPerson';
 import CreateCasoPage from './pages/CreateCaso';
+import CreateInformePage from './pages/CreateInforme';
 import AuthContext from './context/auth-context';
 
 import './App.css';
@@ -54,6 +55,9 @@ class App extends Component {
               )}
               {this.state.token && (
                 <Route path="/createcaso" component={CreateCasoPage} />
+              )}
+              {this.state.token && (
+                <Route path="/createinforme" component={CreateInformePage} />
               )}
               {!this.state.token && <Redirect to="/login" exact />}
             </Switch>

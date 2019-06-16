@@ -236,7 +236,6 @@ module.exports = {
     if (casoExistente) {
       throw new Error('Este numero expediente ya existe.')
     }
-
     const caso = new Caso({
       expediente: args.casoInput.expediente,
       juzgado: args.casoInput.juzgado,

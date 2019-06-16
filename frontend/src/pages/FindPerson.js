@@ -11,6 +11,7 @@ import './FindPerson.css';
 
 
 class FindPersonPage extends Component {
+  // Estados
   state = {
     server: server.server,
     listar: false,
@@ -65,11 +66,13 @@ class FindPersonPage extends Component {
                 cambioDomicilioVict
                 medidasProteccion
                 f_emisionMedidas
-                imputado{
+                ofendido{
+                  _id
                   nombre
                   identificacion
                 }
-                ofendido{
+                imputado{
+                  _id
                   nombre
                   identificacion
                 }
@@ -85,11 +88,13 @@ class FindPersonPage extends Component {
                 trasladoFiscalia
                 primerizo
                 casoPorDesovediencia
-                imputado{
+                ofendido{
+                  _id
                   nombre
                   identificacion
                 }
-                ofendido{
+                imputado{
+                  _id
                   nombre
                   identificacion
                 }
@@ -116,7 +121,7 @@ class FindPersonPage extends Component {
     })
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Failed!');
+          throw new Error('Error de servidor!');
         }
         return res.json();
       })
@@ -130,6 +135,7 @@ class FindPersonPage extends Component {
         const canton = resData.data.buscarPersona.canton;
         const distrito = resData.data.buscarPersona.distrito;
         const direccion = resData.data.buscarPersona.direccion;
+        console.log(resData.data.buscarPersona.casos);
         if (resData === null) {
           this.setState({ listar: false });
         }
@@ -148,6 +154,8 @@ class FindPersonPage extends Component {
             direccion: direccion
           });
         }
+        console.log(casos);
+        console.log(informes);
       })
       .catch(err => {
         console.log(err);
