@@ -1,20 +1,12 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-
 
 import './InformeItem.css';
 
 const informeItem = props => (
-  <tr key={props.informeId}>
-    <td>{props.nInforme}</td>
-    <td>{new Date(props.f_informe).toLocaleDateString()}</td>
-    <td>{props.imputadoNombre}</td>
-    <td>{props.ofendidoNombre}</td>
-    <td>
-      <Button variant="outline-primary" onClick={props.detail.bind(this, props.informeId)}>
-        Ver Informe
-      </Button>
-    </td>
+  <tr className="findInformeTableBodyRow" key={props.informeId} onClick={props.detail.bind(this, props.informeId)}>
+    <td className="findInformeTableBodyRowC1">{props.nInforme}</td>
+    <td className="findInformeTableBodyRowC2">{props.imputadoNombre}</td>
+    <td className="findInformeTableBodyRowC3">{props.ofendidoNombre}</td>
   </tr>
 );
 

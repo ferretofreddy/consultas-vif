@@ -51,7 +51,7 @@ module.exports = {
         expiresIn: '1h'
       }
     )
-    return { userId: user.id, identificacion: user.identificacion, roll: user.roll, token: token, tokenExpiration: 1 }
+    return { userId: user.id, identificacion: user.identificacion, name: user.name, roll: user.roll, token: token, tokenExpiration: 1 }
   },
 
   editarProfile: async ({ identificacion, oldPassword, newPassword1, newPassword2, name }) => {
@@ -82,7 +82,7 @@ module.exports = {
           expiresIn: '1h'
         }
       )
-      return { userId: user.id, identificacion: user.identificacion, roll: user.roll, token: token, tokenExpiration: 1 }
+      return { userId: user.id, identificacion: user.identificacion, name: user.name, roll: user.roll, token: token, tokenExpiration: 1 }
     } catch (err) {
       console.log(err)
       throw err

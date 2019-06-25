@@ -67,6 +67,7 @@ type User {
 type AuthData {
   userId: ID
   identificacion: String
+  name: String
   roll: String
   token: String
   tokenExpiration: Int

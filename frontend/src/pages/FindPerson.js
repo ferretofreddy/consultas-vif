@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Form, Button, Card, Col } from 'react-bootstrap';
 
 import Menu from '../components/Navigation/Menu';
 import CasoList from '../components/Caso/CasoList';
@@ -15,6 +14,7 @@ class FindPersonPage extends Component {
   state = {
     server: server.server,
     listar: false,
+    sinResultados: false,
     buscar: true,
     selectedCaso: null,
     selectedInforme: null,
@@ -42,7 +42,7 @@ class FindPersonPage extends Component {
     event.preventDefault();
     const identificacion = this.identificacionEl.current.value;
 
-    this.setState({ listar: false, buscar: true });
+    this.setState({ listar: false, buscar: true, sinResultados: false });
     const requestBody = {
       query: `
           query BuscarPersona($identificacion: String! ) {
@@ -126,6 +126,9 @@ class FindPersonPage extends Component {
         return res.json();
       })
       .then(resData => {
+        if (resData === null) {
+          this.setState({ listar: false, sinResultados: true });
+        }
         const casos = resData.data.buscarPersona.casos;
         const informes = resData.data.buscarPersona.informes;
         const identificacion = resData.data.buscarPersona.identificacion;
@@ -136,9 +139,7 @@ class FindPersonPage extends Component {
         const distrito = resData.data.buscarPersona.distrito;
         const direccion = resData.data.buscarPersona.direccion;
         console.log(resData.data.buscarPersona.casos);
-        if (resData === null) {
-          this.setState({ listar: false });
-        }
+
         if (this.isActive) {
           this.setState({
             casos: casos,
@@ -159,7 +160,7 @@ class FindPersonPage extends Component {
       })
       .catch(err => {
         console.log(err);
-        this.setState({ listar: false });
+        this.setState({ listar: false, sinResultados: true });
       });
   };
 
@@ -198,252 +199,214 @@ class FindPersonPage extends Component {
         <Menu />
         {this.state.selectedCaso && (
           <div className="container">
-            <div className="">
-              <h2 className="">Expediente Judicial N° {this.state.selectedCaso.expediente}</h2>
+            <div className="findCasoHeader">
+              <h2 className="findExpedienteHeaderH2">Expediente Judicial N° {this.state.selectedCaso.expediente}</h2>
             </div>
-            <Form>
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Juzgado</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.juzgado} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Medidas de Proteccion</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.medidasProteccion ? ("Cuenta con medidas de potección") : ("No cuenta con medidas de potección")} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Fecha de emisión medidas</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.medidasProteccion ? (new Date(this.state.selectedCaso.f_emisionMedidas).toLocaleDateString()) : ("Sin Datos")} />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Nombre del Imputado</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.imputado.nombre} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Identificación del Imputado</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.imputado.identificacion} />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Nombre del Ofendido</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.ofendido.nombre} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Identificación del Ofendido</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.ofendido.identificacion} />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Notificación del Imputado</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.notifImputado ? ("Imputado fue notificado") : ("Imputado sin notificar")} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Fecha de notificación del Imputado</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.notifImputado ? (new Date(this.state.selectedCaso.f_notifImputado).toLocaleDateString()) : ("Sin Datos")} />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Notificación del Ofendido</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.notifOfendido ? ("Ofendido fue notificado") : ("Ofendido sin notificar")} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Fecha de notificación del Ofendido</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.notifOfendido ? new Date(this.state.selectedCaso.f_notifOfendido).toLocaleDateString() : ("Sin Datos")} />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Desalojo del Imputado</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.desalojo ? ("Se preacticó desalojo") : ("No se practicó desalojo")} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Cambbio de Domicilio de Víctima</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedCaso.cambioDomicilioVict ? ("Víctima cambió de domicilio") : ("Víctima No cambió de domicilio")} />
-                </Form.Group>
-              </Form.Row>
-              <Button className="" variant="outline-primary" onClick={this.unselectedCaso}>
+            <div className="findSecondPersonalesDiv">
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Juzgado</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.juzgado} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Medidas de Proteccion</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.medidasProteccion ? ("Se solicitaron") : ("No se solicitaron")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Fecha de emisión medidas</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.medidasProteccion ? (new Date(this.state.selectedCaso.f_emisionMedidas).toLocaleDateString()) : ("Sin Datos")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Nombre del Imputado</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.imputado.nombre} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Identificación del Imputado</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.imputado.identificacion} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Nombre del Ofendido</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.ofendido.nombre} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Identificación del Ofendido</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.ofendido.identificacion} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Notificación del Imputado</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.notifImputado ? ("Imputado fue notificado") : ("Imputado sin notificar")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Fecha de notificación del Imputado</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.notifImputado ? (new Date(this.state.selectedCaso.f_notifImputado).toLocaleDateString()) : ("Sin Datos")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Notificación del Ofendido</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.notifOfendido ? ("Ofendido fue notificado") : ("Ofendido sin notificar")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Fecha de notificación del Ofendido</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.notifOfendido ? new Date(this.state.selectedCaso.f_notifOfendido).toLocaleDateString() : ("Sin Datos")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Desalojo del Imputado</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.desalojo ? ("Se preacticó desalojo") : ("No se practicó desalojo")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Cambio de Domicilio de Víctima</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.cambioDomicilioVict ? ("Cambió de domicilio") : ("No cambió de domicilio")} />
+              </div>
+              <buttom className="findFormInformeSubmit" variant="outline-primary" onClick={this.unselectedCaso}>
                 cerrar
-              </Button>
-            </Form>
+        </buttom>
+            </div>
           </div>
         )}
 
         {this.state.selectedInforme && (
           <div className="container">
-            <div className="">
-              <h2 className="">Informe Policial N° {this.state.selectedInforme.nInforme}</h2>
+            <div className="findCasoHeader">
+              <h2 className="findInformeHeaderH2">Informe Policial N° {this.state.selectedInforme.nInforme}</h2>
             </div>
-            <Form>
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Fecha del informe</Form.Label>
-                  <Form.Control readOnly defaultValue={new Date(this.state.selectedInforme.f_informe).toLocaleDateString()} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Aprehendido</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedInforme.aprehendido ? ("Imputado aprehendido") : ("Imputado sin aprehender")} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Caso CLAIS</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedInforme.casoCLAIS ? ("Es caso CLAIS") : ("No es caso CLAIS")} />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Nombre del Imputado</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedInforme.imputado.nombre} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Identificacion del Imputado</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedInforme.imputado.identificacion} />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Nombre del Ofendido</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedInforme.ofendido.nombre} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Identificacion del Ofendido</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedInforme.ofendido.identificacion} />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Decomiso arma blanca</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedInforme.decA_Blanca ? ("Se decomisó arma blnaca") : ("No se decomisó arma blanca")} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Decomiso arma de fuego</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedInforme.decA_Fuego ? ("Se decomisó arma de fuego") : ("No se decomisó arma de fuego")} />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Traslado a fiscalia</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedInforme.trasladoFiscalia ? ("Imputado fue trasladado") : ("Imputado no fue trasladado")} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Primerizo</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedInforme.primerizo ? ("Imputado es primerizo") : ("Imputado no es primerizo")} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Caso por desobediencia</Form.Label>
-                  <Form.Control readOnly defaultValue={this.state.selectedInforme.casoPorDesovediencia ? ("Es caso por desobediencia") : ("No es caso por desobediencia")} />
-                </Form.Group>
-              </Form.Row>
-              <Button className="" variant="" onClick={this.unselectedInforme}>
+            <div className="findSecondPersonalesDiv">
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Fecha del informe</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={new Date(this.state.selectedInforme.f_informe).toLocaleDateString()} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Aprehendido</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.aprehendido ? ("Imputado aprehendido") : ("Imputado sin aprehender")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Caso CLAIS</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.casoCLAIS ? ("Es caso CLAIS") : ("No es caso CLAIS")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Nombre del Imputado</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.imputado.nombre} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Identificacion del Imputado</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.imputado.identificacion} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Nombre del Ofendido</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.ofendido.nombre} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Identificacion del Ofendido</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.ofendido.identificacion} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Decomiso arma blanca</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.decA_Blanca ? ("Se decomisó") : ("No se decomisó")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Decomiso arma de fuego</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.decA_Fuego ? ("Se decomisó") : ("No se decomisó")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Traslado a fiscalia</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.trasladoFiscalia ? ("Imputado trasladado") : ("Imputado no trasladado")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Primerizo</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.primerizo ? ("Imputado primerizo") : ("Imputado no primerizo")} />
+              </div>
+              <div className="findSecondPersonalesDivGroup" >
+                <span className="PersonalesGroupSpan">Caso por desobediencia</span>
+                <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.casoPorDesovediencia ? ("Caso por desobediencia") : ("No es caso por desobediencia")} />
+              </div>
+              <buttom className="findFormInformeSubmit" onClick={this.unselectedInforme}>
                 cerrar
-              </Button>
-            </Form>
+              </buttom>
+            </div>
           </div>
         )}
 
         {this.state.buscar && (
           <div className="container">
-            <Card.Header className="">
-              <Form className="" inline onSubmit={this.submitHandler}>
-                <Form.Label className=""> <h4>Identificación: </h4> </Form.Label><hr></hr>
-                <Form.Control as='input' type="text" className="" ref={this.identificacionEl} />
-                <Button className="" variant="outline-primary" type="submit">
+            <div className="findMain1Div">
+              <form className="findForm" onSubmit={this.submitHandler}>
+                <span className="findFormSpan">
+                  Identificación:
+                </span>
+                <input type="text" className="findFormInput" ref={this.identificacionEl} />
+                <buttom className="findFormSubmit" type="submit" onClick={this.submitHandler}>
                   Buscar
-            </Button>
-              </Form>
-            </Card.Header>
-            <Card.Body>
-              {this.state.listar ? (
-                <div>
-                  <Form className="">
+            </buttom>
+              </form>
+            </div>
+            <div className="findMain2Div">
+              {this.state.listar && (
+                <div className="findSecond1Div">
+                  <div className="findSecondPersonalesDiv">
+                    <div className="findSecondPersonalesDivGroup" >
+                      <span className="PersonalesGroupSpan">Identificación</span>
+                      <input type="text" className="PersonalesGroupInput" readOnly defaultValue={this.state.identificacion} />
+                    </div>
+                    <div className="findSecondPersonalesDivGroup" >
+                      <span className="PersonalesGroupSpan">Nombre</span>
+                      <input type="text" className="PersonalesGroupInput" readOnly defaultValue={this.state.nombre} />
+                    </div>
 
-                    <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
-                      <Form.Label>Identificación</Form.Label>
-                      <Form.Control readOnly defaultValue={this.state.identificacion} />
-                    </Form.Group>
+                    <div className="findSecondPersonalesDivGroup" >
+                      <span className="PersonalesGroupSpan">Fecha de nacimiento</span>
+                      <input type="text" className="PersonalesGroupInput" readOnly defaultValue={new Date(this.state.fechaNacimiento).toLocaleDateString()} />
+                    </div>
+                    <div className="findSecondPersonalesDivGeneral" >
+                      <h4 className="PersonalesGroupH4">Domicilio</h4>
+                    </div>
 
-                    <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
-                      <Form.Label>Nombre</Form.Label>
-                      <Form.Control readOnly defaultValue={this.state.nombre} />
-                    </Form.Group>
+                    <div className="findSecondPersonalesDivGroup" >
+                      <span className="PersonalesGroupSpan">Provincia</span>
+                      <input type="text" className="PersonalesGroupInput" readOnly defaultValue={this.state.provincia} />
+                    </div>
 
-                    <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
-                      <Form.Label>Fecha de nacimiento</Form.Label>
-                      <Form.Control readOnly defaultValue={new Date(this.state.fechaNacimiento).toLocaleDateString()} />
-                    </Form.Group>
+                    <div className="findSecondPersonalesDivGroup" >
+                      <span className="PersonalesGroupSpan">Cantón</span>
+                      <input type="text" className="PersonalesGroupInput" readOnly defaultValue={this.state.canton} />
+                    </div>
 
-                    <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
-                      <Form.Label>Provincia</Form.Label>
-                      <Form.Control readOnly defaultValue={this.state.provincia} />
-                    </Form.Group>
+                    <div className="findSecondPersonalesDivGroup" >
+                      <span className="PersonalesGroupSpan">Distrito</span>
+                      <input type="text" className="PersonalesGroupInput" readOnly defaultValue={this.state.distrito} />
+                    </div>
 
-                    <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
-                      <Form.Label>Cantón</Form.Label>
-                      <Form.Control readOnly defaultValue={this.state.canton} />
-                    </Form.Group>
-
-                    <Form.Group className="col-sm-12 col-md-4 col-lg-4" >
-                      <Form.Label>Distrito</Form.Label>
-                      <Form.Control readOnly defaultValue={this.state.distrito} />
-                    </Form.Group>
-
-                    <Form.Group className="col-sm-12 col-md-12 col-lg-12">
-                      <Form.Label>Dirección exacta</Form.Label>
-                      <Form.Control as="textarea" rows="3" readOnly defaultValue={this.state.direccion} />
-                    </Form.Group>
-                  </Form>
-                  <br />
-                  <Card>
-                    <Card.Body className="">
-                      <Card.Title ><h3>Expedientes judiciales asociados</h3></Card.Title>
-                      <div className='card-text'>
-                        <CasoList
-                          casos={this.state.casos}
-                          onViewDetail={this.showCasoHandler}
-                        />
-                      </div>
-                    </Card.Body>
-                  </Card>
-                  <Card>
-                    <Card.Body className="">
-                      <Card.Title><h3>Informes policiales asociados</h3></Card.Title>
-                      <div className='card-text'>
-                        <InformeList
-                          informes={this.state.informes}
-                          viewDetail={this.showInformeHandler}
-                        />
-                      </div>
-                    </Card.Body>
-                  </Card>
+                    <div className="findSecondPersonalesDivGroup">
+                      <span className="PersonalesGroupSpan">Dirección exacta</span>
+                      <textarea type="textarea" className="PersonalesGroupTextArea" readOnly defaultValue={this.state.direccion} />
+                    </div>
+                  </div>
+                  <div className="findSecondJudicialesDiv">
+                    <div className="findSecondJudicialesGroup">
+                      <h3 className="findSecondJudicialesH3">Expedientes judiciales asociados</h3>
+                    </div>
+                    <div className="findSecondJudicialesGroup">
+                      <CasoList
+                        casos={this.state.casos}
+                        onViewDetail={this.showCasoHandler}
+                      />
+                    </div>
+                  </div>
+                  <div className="findSecondJudicialesDiv">
+                    <div className="findSecondJudicialesGroup">
+                      <h3 className="findSecondJudicialesH3">Informes policiales asociados</h3>
+                    </div>
+                    <div className="findSecondJudicialesGroup">
+                      <InformeList
+                        informes={this.state.informes}
+                        viewDetail={this.showInformeHandler}
+                      />
+                    </div>
+                  </div>
                 </div>
-              ) : (<p>No hay datos para esa persona...</p>)}
-            </Card.Body>
+              )}
+              {this.state.sinResultados && (
+                    <div className="findSecond2Div">
+                      <p>No se encuentran registros asociados a ese número de identificación</p>
+                    </div>)}
+
+            </div>
           </div>
         )}
       </React.Fragment>

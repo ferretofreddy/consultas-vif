@@ -1,0 +1,232 @@
+
+
+/********************************************/
+/*  Resolucion de pantalla minima de 769px  */
+/********************************************/
+@media /* desktop */ (min-width: 769px) {
+  .findMain1Div {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .findForm {
+    width: fit-content;
+    padding: 0px 20px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid white;
+    margin: 0 auto;
+  }
+  .findFormSpan {
+    margin-right: 5px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    vertical-align: middle;
+  }
+  .findFormInput {
+    display: inline-block;
+    padding-bottom: 4px;
+    padding-top: 5px;
+    padding-right: 20px;
+    padding-left: 40px;
+    width: 180px;
+    font-size: 24px;
+    color: white;
+    letter-spacing: 2px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    background: transparent;
+    border: 2px solid white;
+    vertical-align: middle;
+  }
+  .findFormSubmit {
+    font-size: 24px;
+    padding-bottom: 4px;
+    padding-top: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    letter-spacing: 1px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  .findMain2Div {
+    display: block;
+    width: fit-content;
+    padding: 0px 20px;
+    padding-top: 20px;
+    margin: 0px auto;
+  }
+  .findSecond1Div {
+    display: block;
+  }
+  .findSecondPersonalesDiv {
+    display: block;
+    width: fit-content;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 5px 10px;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+  }
+  .findSecondPersonalesDivGroup {
+    display: flex;
+    justify-content: flex-end;
+    margin: 5px 0px;
+    clear: both;
+  }
+  .findSecondPersonalesDivGeneral {
+    display: flex;
+    margin: 5px 0px;
+    clear: both;
+  }
+  .PersonalesGroupH4 {
+    display: block;
+    width: 100%;
+    font-size: 22px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    padding-top: 5px;
+    padding-bottom: 1px;
+    border-bottom: 1px solid white;
+  }
+  .PersonalesGroupSpan {
+    display: block;
+    font-size: 22px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    padding: 3px 10px;
+  }
+  .PersonalesGroupInput {
+    display: flex;
+    width: 270px;
+    padding: 0px 10px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 7px;
+  }
+  .PersonalesGroupTextArea {
+    display: flex;
+    width: 270px;
+    padding: 0px 10px;
+    font-size: 18px;
+    text-align: justify;
+    color: white;
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 7px;
+  }
+  .findSecondJudicialesDiv {
+    display: block;
+    width: fit-content;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .findSecondPolicialesDiv {
+    display: block;
+    width: fit-content;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .findSecondJudicialesGroup {
+    display: block;
+    width: 100%;
+    padding: 10px 5px;
+    border-bottom: 1px solid white;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  .findSecondJudicialesH3 {
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-size: 26px;
+    letter-spacing: 2px;
+  }
+  .findSecond2Div {
+    display: block;
+    width: fit-content;
+  }
+  .findSecond2Div p {
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+  }
+  .findCasoHeader {
+    display: block;
+    width: fit-content;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 5px 10px;
+    border-top: 3px solid white;
+  }
+  .findInformeHeaderH2{
+    display: block;
+    text-align: center;
+    margin: 2px auto;
+    padding: 10px 0px;
+    font-size: 32px;
+    letter-spacing: 4px;
+  }
+  .findExpedienteHeaderH2{
+    display: block;
+    text-align: center;
+    margin: 2px auto;
+    padding: 10px 0px;
+    font-size: 28px;
+    letter-spacing: 4px;
+  }
+  .findFormInformeSubmit {
+    display: block;
+    width: 270px;
+    padding: 10px 10px;
+    margin: 18px auto;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+  .findInformeTable {
+    border-spacing: unset;
+  }
+  .findInformeTableHeaderRow {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+  .findInformeTableHeaderRowC1 {
+    width: 200px;
+    border-bottom: 2px solid white;
+  }
+  .findInformeTableHeaderRowC2, .findInformeTableHeaderRowC3 {
+    width: 250px;
+    border-bottom: 2px solid white;
+  }
+  .findInformeTableBodyRow {
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+  }
+  .findInformeTableBodyRow:hover {
+    background-color: rgba(60, 110, 113, 0.7);
+  }
+}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
 
 import CasoItem from './CasoItem';
 import './CasoList.css';
@@ -11,28 +10,25 @@ const casoList = props => {
         key={caso._id}
         casoId={caso._id}
         expediente={caso.expediente}
-        juzgado={caso.juzgado}
         imputadoNombre={caso.imputado.nombre}
         ofendidoNombre={caso.ofendido.nombre}
         onDetail={props.onViewDetail}
       />
     );
-    
-    
+
+
   });
   return (
-  <Table className="striped bordered">
-  <thead>
-      <tr>
-        <th className=" ">Expediente N°</th>
-        <th className=" ">Juzgado</th>
-        <th className=" ">Nombre del agresor</th>
-        <th className=" ">Nombre de la víctima</th>
-        <th className=" ">Detalles</th>
-      </tr>
-    </thead>
-    <tbody>{casos}</tbody>
-  </Table>
+    <table className="findInformeTable">
+      <thead className="findInformeTableHeader">
+        <tr className="findInformeTableHeaderRow">
+          <th className="findInformeTableHeaderRowC1">Expediente N°</th>
+          <th className="findInformeTableHeaderRowC2">Nombre del agresor</th>
+          <th className="findInformeTableHeaderRowC3">Nombre de la víctima</th>
+        </tr>
+      </thead>
+      <tbody className="findInformeTableBody">{casos}</tbody>
+    </table>
   );
 };
 

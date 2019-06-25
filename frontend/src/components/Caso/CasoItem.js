@@ -1,20 +1,12 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-
 
 import './CasoItem.css';
 
 const casoItem = props => (
-  <tr key={props.casoId}>
-    <td className=" ">{props.expediente}</td>
-    <td className=" ">{props.juzgado}</td>
-    <td className=" ">{props.imputadoNombre}</td>
-    <td className=" ">{props.ofendidoNombre}</td>
-    <td className=" ">
-      <Button variant="outline-primary" onClick={props.onDetail.bind(this, props.casoId)}>
-        Ver Expediente
-      </Button>
-    </td>
+  <tr className="findInformeTableBodyRow" key={props.casoId} onClick={props.onDetail.bind(this, props.casoId)}>
+    <td className="findInformeTableBodyRowC1">{props.expediente}</td>
+    <td className="findInformeTableBodyRowC2">{props.imputadoNombre}</td>
+    <td className="findInformeTableBodyRowC3">{props.ofendidoNombre}</td>
   </tr>
 );
 

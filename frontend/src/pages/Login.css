@@ -1,69 +1,121 @@
-.d1{
-  width: 70%;
-  height: 100vh;
-  overflow: hidden;
-  float: left;
-}
-.login{
-  position: fixed;
-  overflow: hidden;
-  width: 100%;
-  height: 100vh;
-  right: 0;
-  margin: 0;
-  background: rgba(220, 73, 58, 1);
+.loginCard {
+  display: flex;
+  width: 40%;
+  max-width: 450px;
+  margin: 0 auto;
+  margin-top: 20vh;
+  box-sizing: border-box;
   align-content: center;
-  z-index: 1;
 }
-.login form{
-  width: 60%;
-  margin: 20% auto;
-}
-.login h2{
-  font-size: 30px;
-  color: rgba(38, 38, 38, 1);
-  padding-bottom:8px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid rgba(38, 38, 38, 1);
-}
-.login label{
-  color: rgba(38, 38, 38, 1);
-  display: block;
-  font-size: 18px;
-  font-weight: 700;
-  margin: 10px 0;
-  margin-left: 10px;
-  margin-top: 20px;
-}
-.txtb{
+.loginForm {
   width: 100%;
-  padding:8px 0;
-  padding-left: 15px;
-  font-size: 18px;
-  border: none;
-  border-radius: 18px;
+  box-sizing: border-box;
 }
-.btn2{
+.loginFormDiv {
+  display: flex;
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 0;
+}
+.loginFormH2 {
   display: block;
-  float: right;
-  background: rgba(38, 120, 153, 1);
-  font-size: 18px;
-  margin-top: 40px;
-  margin-right: -5%;
-  padding: 8px 50px;
-  color: white;
-  border: none;
-  border-radius: 18px;
-  cursor: pointer;
-
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 15px 0;
+  border-bottom: 4px solid rgba(255, 255, 255, 1);
+  font-size: 40px;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.15em
 }
-@media /* desktop */ (min-width: 769px) {
-  .login{
-    width: 40%;
+.loginFormLabel {
+  display: flex;
+  float: left;
+  width: 50%;
+  letter-spacing: 0.10em;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 22px;
+}
+
+.loginFormInput {
+  display: flex;
+  float: left;
+  width: 50%;
+  border-radius: 7px;
+  text-align: center;
+  background: transparent;
+  color: rgba(255, 255, 255, 1);
+  border: solid 1px rgba(255, 255, 255, 1);
+  box-shadow: none;
+}
+
+.loginFormBtn {
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(53, 53, 53, 1);
+  background: rgba(255, 255, 255, 1);
+  display: block;
+  width: 150px;
+  margin: 0 auto;
+  border: solid 1px rgba(255, 255, 255, 1);
+  border-radius: 7px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+/********************************************/
+/*  PANTALLAS CON RESOLUCION MENOR A 860 PX */
+/********************************************/
+
+@media screen and (max-width: 860px) {
+  .loginCard {
+    width: 60%;
+    max-width: 350px;
+    margin-top: 10vh;
+  }
+
+  .loginFormLabel {
+    display: flex;
+    float: left;
+    width: 50%;
+  }
+  
+  .loginFormInput {
+    display: flex;
+    float: left;
+    width: 50%;
   }
 }
-@media /* desktop */ (min-width: 921px) {
-  .login{
-    width: 30%;
+
+/********************************************/
+/*  PANTALLAS CON RESOLUCION MENOR A 415 PX */
+/********************************************/
+
+@media screen and (max-width: 415px) {
+  .loginCard {
+    width: 95%;
+    max-width: 300px;
+    margin-top: 0vh;
+  }
+
+  .loginFormLabel {
+    display: none;
+  }
+  
+  .loginFormInput {
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    font-size: 24px;
+    border: solid 3px rgba(255, 255, 255, 1);
+    border-radius: 25px;
+  }
+
+  .loginFormBtn {
+    width: 100%;
+    border-radius: 25px;
+    border: solid 3px rgba(255, 255, 255, 1);
   }
 }

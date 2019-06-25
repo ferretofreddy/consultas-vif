@@ -15,15 +15,16 @@ class App extends Component {
     token: null,
     userId: null,
     identificacion: null,
-    roll: null
+    name: null,
+    roll: null 
   };
-
-  login = (token, userId, tokenExpiration, identificacion, roll) => {
-    this.setState({ token: token, userId: userId, identificacion: identificacion, roll: roll });
+  
+  login = (token, userId, tokenExpiration, identificacion, name, roll) => {
+    this.setState({ token: token, userId: userId, tokenExpiration: tokenExpiration, identificacion: identificacion, name: name, roll: roll });
   };
 
   logout = () => {
-    this.setState({ token: null, userId: null, identificacion: null, roll: null });
+    this.setState({ token: null, userId: null, tokenExpiration: null, identificacion: null, name: null, roll: null });
   };
 
   render() {
@@ -33,7 +34,9 @@ class App extends Component {
           <AuthContext.Provider
             value={{
               token: this.state.token,
+              roll: this.state.roll,
               userId: this.state.userId,
+              name: this.state.name,
               login: this.login,
               logout: this.logout
             }}

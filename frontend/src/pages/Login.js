@@ -3,14 +3,6 @@ import React, { Component } from 'react';
 import './Login.css';
 import AuthContext from '../context/auth-context';
 import server from '../components/Variable/Variable';
-import Background from '../img/bgUniforme.jpg';
-
-var d1Style = {
-  backgroundImage: `url(${Background})`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'left',
-  backgroundRepeat: 'no-repeat'
-};
 
 class LoginPage extends Component {
   state = {
@@ -42,6 +34,7 @@ class LoginPage extends Component {
             token
             tokenExpiration
             identificacion
+            name
             roll
           }
         }
@@ -62,7 +55,7 @@ class LoginPage extends Component {
     })
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Failed!');
+          throw new Error('Error de servidor!');
         }
         return res.json();
       })
@@ -73,6 +66,7 @@ class LoginPage extends Component {
             resData.data.login.userId,
             resData.data.login.tokenExpiration,
             resData.data.login.identificacion,
+            resData.data.login.name,
             resData.data.login.roll
           );
         }
@@ -84,20 +78,23 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
-        <div className="d1" style={ d1Style }>
-
-        </div>
-        <div className="login">
-          <form className="" onSubmit={this.submitHandler}>
-            <h2>Login</h2>
-            <label htmlFor="identificacion">Identificación:</label>
-            <input className="txtb" type="text" name="identificacion" placeholder="101110111" ref={this.identificacionEl} />
-            <label htmlFor="password">Contraseña:</label>
-            <input className="txtb" type="password" name="password" ref={this.passwordEl} />
-            <button className="btn2" type="submit">Ingresar</button>
-          </form>
-        </div>
+      <div className="loginCard">
+        <form className="loginForm" onSubmit={this.submitHandler}>
+          <div className="loginFormDiv">
+            <h2 className="loginFormH2">Login</h2>
+          </div>
+          <div className="loginFormDiv">
+            <label className="loginFormLabel" htmlFor="identificacion">Identificación:</label>
+            <input className="loginFormInput" autoFocus type="text" name="identificacion" placeholder="Identificación" autoComplete="identificacion" ref={this.identificacionEl} />
+          </div>
+          <div className="loginFormDiv">
+            <label className="loginFormLabel" htmlFor="password">Contraseña:</label>
+            <input className="loginFormInput" type="password" name="password" placeholder="Contraseña" autoComplete="current-password" ref={this.passwordEl} />
+          </div>
+          <div className="loginFormDiv">
+            <button className="loginFormBtn" type="submit"  >Ingresar</button>
+          </div>
+        </form>
       </div>
     );
   }
