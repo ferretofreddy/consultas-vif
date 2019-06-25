@@ -400,9 +400,9 @@ class CreateCasoPage extends Component {
     let campoImputado;
     if (datoImputado !== null) {
       campoImputado = <div className="">
-        <label className="">Identificacion del imputado:</label>
-        <input className="" defaultValue={this.state.imputadoIdentificacion} />
-        <button className="" onClick={this.buscarImputado}>Cambiar</button>
+        <label className="findResultLabel">Identificacion del imputado:</label>
+        <input className="findResultInput" defaultValue={this.state.imputadoIdentificacion} />
+        <button className="findResultBtn" onClick={this.buscarImputado}>Cambiar</button>
       </div>
     }
     else if (sinResultado) {
@@ -413,7 +413,9 @@ class CreateCasoPage extends Component {
       </div>
     }
     else {
-      campoImputado = <button className="" onClick={this.buscarImputado}>Buscar imputado</button>
+      campoImputado = <div className="findPersonDiv">
+        <button className="findPersonBtn" onClick={this.buscarImputado}>Buscar imputado</button>
+      </div>
     }
 
     const datoOfendido = this.state.ofendidoId;
@@ -421,11 +423,9 @@ class CreateCasoPage extends Component {
     let campoOfendido;
     if (datoOfendido !== null) {
       campoOfendido = <div className="">
-        <label className="">Identificacion del ofendido:</label>
-        <div className="">
-          <label className="">{this.state.ofendidoIdentificacion}</label>
-          <button className="" onClick={this.buscarOfendido}>Cambiar</button>
-        </div>
+        <label className="findResultLabel">Identificacion del ofendido:</label>
+        <input className="findResultInput" defaultValue={this.state.ofendidoIdentificacion} />
+        <button className="findResultBtn" onClick={this.buscarOfendido}>Cambiar</button>
       </div>
     } else if (sinResultado1) {
       campoOfendido = <div className="">
@@ -434,7 +434,7 @@ class CreateCasoPage extends Component {
         <button className="" type="button" onClick={this.crearOfendido}>Crear ofendido</button>
       </div>
     } else {
-      campoOfendido = <button className="" onClick={this.buscarOfendido}>Buscar ofendido</button>
+      campoOfendido = <button className="findPersonBtn" onClick={this.buscarOfendido}>Buscar ofendido</button>
     }
 
     return (
@@ -510,14 +510,14 @@ class CreateCasoPage extends Component {
 
         {this.state.FindOfendido && (
           <div className="container">
-            <form className="" onSubmit={this.buscarPersonaHandler}>
-              <legend className="">Buscar Ofendido</legend>
-              <div className="">
-                <label className="">Ingrese identificación del ofendido:</label>
-                <input type="text" className="" ref={this.PersonaIdentificacionEl} />
-              </div>
-              <button className="" type="submit">Buscar</button>
-            </form>
+            <div className="casoFindBox">
+              <legend className="casoFindLegend">Buscar Ofendido</legend>
+              <form className="findForm" onSubmit={this.buscarPersonaHandler}>
+                <span className="findFormSpan">Ingrese identificación del ofendido:</span>
+                <input type="text" className="findFormInput" ref={this.PersonaIdentificacionEl} />
+                <button className="findFormSubmit" type="submit">Buscar</button>
+              </form>
+            </div>
           </div>
         )}
 
