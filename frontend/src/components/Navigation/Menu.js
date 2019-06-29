@@ -31,6 +31,9 @@ const Menu = props => (
                     <li className="menuNavSecondLi">
                       <NavLink className="menu-item" to="/createcaso">Crear Expediente</NavLink>
                     </li>
+                    <li className="menuNavSecondLi">
+                      <NavLink className="menu-item" to="/updatecaso">Modificar Expediente</NavLink>
+                    </li>
                   </ul>
                 </li>
                 <li className="menuNavParentLi">

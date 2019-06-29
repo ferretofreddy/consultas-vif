@@ -136,9 +136,9 @@ module.exports = {
   },
 
   expediente: async ({ expediente }, req) => {
-    if (!req.isAuth) {
+    /* if (!req.isAuth) {
       throw new Error('Acceso Denegado!')
-    }
+    } */
     try {
       const caso = await Caso.findOne({ expediente: expediente })
       return {
@@ -198,9 +198,9 @@ module.exports = {
   },
 
   editarCaso: async ({ expediente, juzgado, notifImputado, f_notifImputado, notifOfendido, f_notifOfendido, desalojo, cambioDomicilioVict, medidasProteccion, f_emisionMedidas }, req) => {
-    /* if (!req.isAuth) {
-      throw new Error('Acceso Denegado!');
-    } */
+    if (!req.isAuth) {
+      throw new Error('Acceso Denegado!')
+    }
     try {
       const caso = await Caso.findOneAndUpdate({ expediente: expediente }, { $set: { juzgado: juzgado, notifImputado: notifImputado, f_notifImputado: f_notifImputado, notifOfendido: notifOfendido, f_notifOfendido: f_notifOfendido, desalojo: desalojo, cambioDomicilioVict: cambioDomicilioVict, medidasProteccion: medidasProteccion, f_emisionMedidas: f_emisionMedidas } }, { new: true })
       return {

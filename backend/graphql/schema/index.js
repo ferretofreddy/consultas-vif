@@ -155,6 +155,10 @@ type RootMutation {
   crearPersona(personaInput: PersonaInput): Persona! 
   crearCaso(casoInput: CasoInput): Caso! 
   crearInforme(informeInput: InformeInput): Informe!
+  editarPersona(identificacion: String!, nombre: String!, f_nacimiento: String!, sexo: String!, edad: Int!, provincia: String!, canton: String!, distrito: String!, direccion: String!): Persona!
+  editarCaso(expediente: String!, juzgado: String!, notifImputado: Boolean!, f_notifImputado: String!, notifOfendido: Boolean!, f_notifOfendido: String!, desalojo: Boolean!, cambioDomicilioVict: Boolean!, medidasProteccion: Boolean!, f_emisionMedidas: String!): Caso!
+  editarInforme(nInforme: String!, f_informe: String!, aprehendido: Boolean!, casoCLAIS: Boolean!, decA_Blanca: Boolean!, decA_Fuego: Boolean!, trasladoFiscalia: Boolean!, primerizo: Boolean!, casoPorDesovediencia: Boolean!): Informe!
+  editarProfile(identificacion: String!, oldPassword: String!, newPassword1: String!, newPassword2: String!, name: String!): AuthData!
 }
 
 

@@ -406,10 +406,10 @@ class CreateCasoPage extends Component {
       </div>
     }
     else if (sinResultado) {
-      campoImputado = <div className="">
-        <label className="">Sin resultados...</label>
-        <button className="" onClick={this.buscarImputado}>Buscar nuevamente</button>
-        <button className="" onClick={this.crearImputado}>Crear imputado</button>
+      campoImputado = <div className="findPersonaBoxDiv">
+        <span className="findPersonaSpan">Sin resultados...</span>
+        <button className="findPersonaBtnBuscar" onClick={this.buscarImputado}>Buscar nuevamente</button>
+        <button className="findPersonaBtnCrear" onClick={this.crearImputado}>Crear imputado</button>
       </div>
     }
     else {
@@ -428,10 +428,10 @@ class CreateCasoPage extends Component {
         <button className="findResultBtn" onClick={this.buscarOfendido}>Cambiar</button>
       </div>
     } else if (sinResultado1) {
-      campoOfendido = <div className="">
-        <label className="">Sin resultados...</label>
-        <button className="" onClick={this.buscarOfendido}>Buscar nuevamente</button>
-        <button className="" type="button" onClick={this.crearOfendido}>Crear ofendido</button>
+      campoOfendido = <div className="findPersonaBoxDiv">
+        <span className="findPersonaSpan">Sin resultados...</span>
+        <button className="findPersonaBtnBuscar" onClick={this.buscarOfendido}>Buscar nuevamente</button>
+        <button className="findPersonaBtnCrear" type="button" onClick={this.crearOfendido}>Crear ofendido</button>
       </div>
     } else {
       campoOfendido = <button className="findPersonBtn" onClick={this.buscarOfendido}>Buscar ofendido</button>
@@ -501,7 +501,7 @@ class CreateCasoPage extends Component {
               <legend className="casoFindLegend">Buscar Imputado</legend>
               <form className="findForm" onSubmit={this.buscarPersonaHandler}>
                 <span className="findFormSpan">Ingrese identificación del imputado:</span>
-                <input type="text" className="findFormInput" ref={this.PersonaIdentificacionEl} />
+                <input type="text" className="findFormInput" autoFocus="true" ref={this.PersonaIdentificacionEl} />
                 <button className="findFormSubmit" type="submit">Buscar</button>
               </form>
             </div>

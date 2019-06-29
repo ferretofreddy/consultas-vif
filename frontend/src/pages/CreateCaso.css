@@ -10,6 +10,7 @@
     box-sizing: border-box;
     margin: 0px auto;
     padding: 0px;
+    margin-bottom: 20px;
   }
   .newCasoFormLegend {
     margin: 0;
@@ -57,7 +58,7 @@
   .newCasoFormCheck {
     display: block;
     float: left;
-    width: 30px;
+    width: 20px;
     height: 30px;
     margin: 0px 10px;
   }
@@ -103,10 +104,12 @@
     font-size: 16px;
     font-weight: 700;
     border-radius: 8px;
+    cursor: pointer;
   }
   .findPersonBtn {
     display: block;
     margin: auto;
+    margin-top: 8px;
     font-size: 24px;
     letter-spacing: 2px;
     padding: 5px 15px;
@@ -115,6 +118,54 @@
     color: white;
     border: 2px solid white;
     border-radius: 10px;
+    cursor: pointer;
+  }
+  .findPersonaBoxDiv {
+    display: block;
+    height: 100%;
+  }
+  .findPersonaSpan {
+    display: block;
+    font-size: 22px;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+  .findPersonaBtnBuscar {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background-color: rgba(40, 75, 99, 1);
+    color: white;
+    border: 1px solid white;
+    padding: 2px 8px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    cursor: pointer;
+  }
+  .findPersonaBtnCrear {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background-color: rgba(40, 75, 99, 1);
+    color: white;
+    border: 1px solid white;
+    padding: 2px 8px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer;
+  }
+  .newCasoFormSubmit {
+    font-size: 24px;
+    padding-bottom: 4px;
+    padding-top: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    background-color: rgba(40, 75, 99, 1);
+    color: white;
+    border: 1px solid white;
+    vertical-align: middle;
     cursor: pointer;
   }
 }

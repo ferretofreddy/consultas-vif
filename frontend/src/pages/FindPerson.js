@@ -330,7 +330,7 @@ class FindPersonPage extends Component {
                 <span className="findFormSpan">
                   Identificación:
                 </span>
-                <input type="text" className="findFormInput" ref={this.identificacionEl} />
+                <input type="text" className="findFormInput" autoFocus="true" ref={this.identificacionEl} />
                 <buttom className="findFormSubmit" type="submit" onClick={this.submitHandler}>
                   Buscar
             </buttom>
