@@ -428,19 +428,22 @@ class CreateInformePage extends Component {
     let campoImputado;
     if (datoImputado !== null) {
       campoImputado = <div className="">
-        <label className="">Identificacion del imputado:</label>
-        <input className="txti" defaultValue={this.state.imputadoIdentificacion} />
+        <label className="findResultLabel">Identificacion del imputado:</label>
+        <input className="findResultInput" defaultValue={this.state.imputadoIdentificacion} />
+        <button className="findResultBtn" onClick={this.buscarImputado}>Buscar Imputado</button>
       </div>
     }
     else if (sinResultado) {
-      campoImputado = <div className="">
-        <label className="">Sin resultados...</label>
-        <button className="btn" onClick={this.buscarImputado}>Buscar Imputado</button>
-        <button className="btn" onClick={this.crearImputado}>Crear Imputado</button>
+      campoImputado = <div className="findPersonaBoxDiv">
+        <span className="findPersonaSpan">Sin resultados...</span>
+        <button className="findPersonaBtnBuscar" onClick={this.buscarImputado}>Buscar Imputado</button>
+        <button className="findPersonaBtnCrear" onClick={this.crearImputado}>Crear Imputado</button>
       </div>
     }
     else {
-      campoImputado = <button className="btn" onClick={this.buscarImputado}>Cargar Imputado</button>
+      campoImputado = <div className="findPersonDiv">
+        <button className="findPersonBtn" onClick={this.buscarImputado}>Buscar imputado</button>
+      </div>
     }
 
     const datoOfendido = this.state.ofendidoId;
@@ -448,17 +451,20 @@ class CreateInformePage extends Component {
     let campoOfendido;
     if (datoOfendido !== null) {
       campoOfendido = <div className="">
-        <label className="">Identificacion del ofendido:</label>
-        <input className="txti" defaultValue={this.state.ofendidoIdentificacion} />
+        <label className="findResultLabel">Identificacion del ofendido:</label>
+        <input className="findResultInput" defaultValue={this.state.ofendidoIdentificacion} />
+        <button className="findResultBtn" onClick={this.buscarOfendido}>Buscar Ofendido</button>
       </div>
     } else if (sinResultado1) {
-      campoOfendido = <div className="">
-        <label className="">Sin resultados...</label>
-        <button className="btn" onClick={this.buscarOfendido}>Buscar Ofendido</button>
-        <button className="btn" type="button" onClick={this.crearOfendido}>Crear Ofendido</button>
+      campoOfendido = <div className="findPersonaBoxDiv">
+        <span className="findPersonaSpan">Sin resultados...</span>
+        <button className="findPersonaBtnBuscar" onClick={this.buscarOfendido}>Buscar Ofendido</button>
+        <button className="findPersonaBtnCrear" type="button" onClick={this.crearOfendido}>Crear Ofendido</button>
       </div>
-    } else {
-      campoOfendido = <button className="btn" onClick={this.buscarOfendido}>Cargar Ofendido</button>
+    }else {
+      campoOfendido = <div className="findPersonDiv">
+        <button className="findPersonBtn" onClick={this.buscarOfendido}>Buscar ofendido</button>
+      </div>
     }
 
     return (
@@ -466,186 +472,186 @@ class CreateInformePage extends Component {
         <Menu />
         {this.state.NewInforme && (
           <div className="container">
-            <form className="form" onSubmit={this.CrearInformeHandler}>
-              <legend className="legend">Nuevo Informe Policial</legend>
-              <div className="form-group">
+            <form className="newCasoForm" onSubmit={this.CrearInformeHandler}>
+              <legend className="newCasoFormLegend">Nuevo Informe Policial</legend>
+              <div className="newCasoFormCampos">
                 {campoImputado}
               </div>
-              <div className="form-group">
+              <div className="newCasoFormCampos">
                 {campoOfendido}
               </div>
-              <div className="form-group">
-                <label className="">Informe Policial</label>
-                <input className="txti" type="text" ref={this.nInformeEl} />
+              <div className="newCasoFormGroup">
+                <span className="newCasoFormLabel">Informe Policial</span>
+                <input className="newCasoFormInput" type="text" ref={this.nInformeEl} />
               </div>
-              <div className="form-group">
-                <label className="">Fecha del Informe</label>
-                <input className="txti" type="date" ref={this.f_informeEl} />
+              <div className="newCasoFormGroup">
+                <span className="newCasoFormLabel">Fecha del Informe</span>
+                <input className="newCasoFormInput" type="date" ref={this.f_informeEl} />
               </div>
-              <div className="form-group">
-                <input checked={this.state.aprehendidoCh} onChange={this.cambioAprehendido} className="chk" type="checkbox" label="Imputado es aprehendido" />
-                <span className="">Imputado es aprehendido</span>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.aprehendidoCh} onChange={this.cambioAprehendido} className="newCasoFormCheck" type="checkbox" label="Imputado es aprehendido" />
+                <span className="newCasoFormSpan">Imputado es aprehendido</span>
               </div>
-              <div className="form-group">
-                <input checked={this.state.casoCLAISCh} onChange={this.cambioCasoCLAIS} className="chk" type="checkbox" label="Es caso CLAIS" />
-                <span className="">Es caso CLAIS</span>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.casoCLAISCh} onChange={this.cambioCasoCLAIS} className="newCasoFormCheck" type="checkbox" label="Es caso CLAIS" />
+                <span className="newCasoFormSpan">Es caso CLAIS</span>
               </div>
-              <div className="form-group">
-                <input checked={this.state.decA_BlancaCh} onChange={this.cambioDecA_Blanca}  className="chk" type="checkbox" label="Decomiso de arma blanca" />
-                <span className="">Decomiso de arma blanca</span>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.decA_BlancaCh} onChange={this.cambioDecA_Blanca}  className="newCasoFormCheck" type="checkbox" label="Decomiso de arma blanca" />
+                <span className="newCasoFormSpan">Decomiso de arma blanca</span>
               </div>
-              <div className="form-group">
-                <input checked={this.state.decA_FuegoCh} onChange={this.cambioDecA_Fuego} className="chk" type="checkbox" label="Decomiso de arma de fuego" />
-                <span className="">Decomiso de arma de fuego</span>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.decA_FuegoCh} onChange={this.cambioDecA_Fuego} className="newCasoFormCheck" type="checkbox" label="Decomiso de arma de fuego" />
+                <span className="newCasoFormSpan">Decomiso de arma de fuego</span>
               </div>
-              <div className="form-group">
-                <input checked={this.state.trasladoFiscaliaCh} onChange={this.cambioTrasladoFiscalia} className="chk" type="checkbox" label="Imputado trasladado a fiscalia"  />
-                <span className="">Imputado trasladado a fiscalia</span>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.trasladoFiscaliaCh} onChange={this.cambioTrasladoFiscalia} className="newCasoFormCheck" type="checkbox" label="Imputado trasladado a fiscalia"  />
+                <span className="newCasoFormSpan">Imputado trasladado a fiscalia</span>
               </div>
-              <div className="form-group">
-                <input checked={this.state.primerizoCh} onChange={this.cambioPrimerizo}  className="chk" type="checkbox" label="Es primerizo" />
-                <span className="">Es primerizo</span>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.primerizoCh} onChange={this.cambioPrimerizo}  className="newCasoFormCheck" type="checkbox" label="Es primerizo" />
+                <span className="newCasoFormSpan">Es primerizo</span>
               </div>
-              <div className="form-group">
-                <input checked={this.state.casoPorDesovedienciaCh} onChange={this.cambioCasoPorDesovediencia}  className="chk" type="checkbox" label="Es caso por desobediencia" />
-                <span className="">Es caso por desobediencia</span>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.casoPorDesovedienciaCh} onChange={this.cambioCasoPorDesovediencia}  className="newCasoFormCheck" type="checkbox" label="Es caso por desobediencia" />
+                <span className="newCasoFormSpan">Es caso por desobediencia</span>
               </div>
-              
-              <button className="submit-btn" type="submit">Guardar</button>
+              <button className="newCasoFormSubmit" type="submit">Guardar</button>
             </form>
           </div>
         )}
 
         {this.state.FindImputado && (
           <div className="container">
-            <form className="form" onSubmit={this.buscarPersonaHandler}>
-              <legend className="legend">Buscar Imputado</legend>
-              <div className="form-group inline-group">
-                <label className="inline-label">Ingrese identificación del imputado:</label>
-                <input type="text" className="txti inline-input" ref={this.PersonaIdentificacionEl} />
-              </div>
-              <button className="submit-btn" type="submit">Buscar</button>
-            </form>
+            <div className="casoFindBox">
+              <legend className="casoFindLegend">Buscar Imputado</legend>
+              <form className="findForm" onSubmit={this.buscarPersonaHandler}>
+                <span className="findFormSpan">Ingrese identificación del imputado:</span>
+                <input type="text" className="findFormInput" autoFocus="true" ref={this.PersonaIdentificacionEl} />
+                <button className="findFormSubmit" type="submit">Buscar</button>
+              </form>
+            </div>
           </div>
         )}
 
         {this.state.FindOfendido && (
           <div className="container">
-            <form className="form" onSubmit={this.buscarPersonaHandler}>
-              <legend className="legend">Buscar Ofendido</legend>
-              <div className="form-group inline-group">
-                <label className="inline-label">Ingrese identificación del ofendido:</label>
-                <input type="text" className="txti inline-input" ref={this.PersonaIdentificacionEl} />
-              </div>
-              <button className="submit-btn" type="submit">Buscar</button>
-            </form>
+            <div className="casoFindBox">
+              <legend className="casoFindLegend">Buscar Ofendido</legend>
+              <form className="findForm" onSubmit={this.buscarPersonaHandler}>
+                <span className="findFormSpan">Ingrese identificación del ofendido:</span>
+                <input type="text" className="findFormInput" ref={this.PersonaIdentificacionEl} />
+                <button className="findFormSubmit" type="submit">Buscar</button>
+              </form>
+            </div>
           </div>
         )}
 
         {this.state.CreateImputado && (
           <div className="container">
-            <form className="form" onSubmit={this.crearPersonaHandler}>
-              <legend className="legend">Crear Imputado</legend>
-              <div className="form-group">
+            <form className="" onSubmit={this.crearPersonaHandler}>
+              <legend className="">Crear Imputado</legend>
+              <div className="">
                 <label>Nombre</label>
-                <input type="text" className="txti" ref={this.nombreEl} />
+                <input type="text" className="" ref={this.nombreEl} />
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Identificación</label>
-                <input type="text" className="txti" ref={this.PersonaIdentificacionEl} />
+                <input type="" className="" ref={this.PersonaIdentificacionEl} />
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Fecha de nacimiento</label>
-                <input type="date" className="txti" ref={this.f_nacimientoEl} />
+                <input type="date" className="" ref={this.f_nacimientoEl} />
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Sexo</label>
-                <select className="txti" ref={this.sexoEl}>
+                <select className="" ref={this.sexoEl}>
                   <option>Masculino</option>
                   <option>Femenino</option>
                 </select>
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Edad</label>
-                <input type="number" className="txti" ref={this.edadEl} />
+                <input type="number" className="" ref={this.edadEl} />
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Provincia</label>
-                <input type="text" className="txti" ref={this.provinciaEl} />
+                <input type="text" className="" ref={this.provinciaEl} />
               </div>
-              <div className="form-group">
-                <label>cantón</label>
-                <input type="text" className="txti" ref={this.cantonEl} />
+              <div className="">
+                <label>Cantón</label>
+                <input type="text" className="" ref={this.cantonEl} />
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Distrito</label>
-                <input type="text" className="txti" ref={this.distritoEl} />
+                <input type="text" className="" ref={this.distritoEl} />
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Dirección exacta</label>
-                <textarea className="txti" ref={this.direccionEl} />
+                <textarea className="" ref={this.direccionEl} />
               </div>
-              <button type="submit" className="submit-btn">Guardar Persona</button>
+              <button type="submit" className="">Guardar Persona</button>
             </form>
           </div>
         )}
 
         {this.state.CreateOfendido && (
           <div className="container">
-            <form className="form" onSubmit={this.crearPersonaHandler}>
-              <legend className="legend">Crear Ofendido</legend>
-              <div className="form-group">
+            <form className="" onSubmit={this.crearPersonaHandler}>
+              <legend className="">Crear Ofendido</legend>
+              <div className="">
                 <label>Nombre</label>
-                <input type="text" className="txti" ref={this.nombreEl} />
+                <input type="text" className="" ref={this.nombreEl} />
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Identificación</label>
-                <input type="text" className="txti" ref={this.PersonaIdentificacionEl} />
+                <input type="text" className="" ref={this.PersonaIdentificacionEl} />
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Fecha de nacimiento</label>
-                <input type="date" className="txti" ref={this.f_nacimientoEl} />
+                <input type="date" className="" ref={this.f_nacimientoEl} />
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Sexo</label>
-                <select className="txti" ref={this.sexoEl}>
+                <select className="" ref={this.sexoEl}>
                   <option>Masculino</option>
                   <option>Femenino</option>
                 </select>
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Edad</label>
-                <input type="number" className="txti" ref={this.edadEl} />
+                <input type="number" className="" ref={this.edadEl} />
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Provincia</label>
-                <input type="text" className="txti" ref={this.provinciaEl} />
+                <input type="text" className="" ref={this.provinciaEl} />
               </div>
-              <div className="form-group">
-                <label>cantón</label>
-                <input type="text" className="txti" ref={this.cantonEl} />
+              <div className="">
+                <label>Cantón</label>
+                <input type="text" className="" ref={this.cantonEl} />
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Distrito</label>
-                <input type="text" className="txti" ref={this.distritoEl} />
+                <input type="text" className="" ref={this.distritoEl} />
               </div>
-              <div className="form-group">
+              <div className="">
                 <label>Dirección exacta</label>
-                <textarea className="txti" ref={this.direccionEl} />
+                <textarea className="" ref={this.direccionEl} />
               </div>
-              <button type="submit" className="submit-btn">Guardar Persona</button>
+              <button type="submit" className="">Guardar Persona</button>
             </form>
           </div>
         )}
+
         {this.state.Result && (
           <div className="container">
-          <form className="form">
-          <div className="form-group">
-        <label className="">El informe {this.state.nInforme}, ha sido guardado...</label>
-        <button className="btn" onClick={this.nuevoInforme}>Crear Informe</button>
-      </div>
-      </form>
-      </div>
+            <form className="">
+              <div className="">
+                <label className="">El informe {this.state.nInforme}, ha sido guardado...</label>
+                <button className="" onClick={this.nuevoInforme}>Nuevo informe</button>
+              </div>
+            </form>
+          </div>
         )}
       </React.Fragment>
     );

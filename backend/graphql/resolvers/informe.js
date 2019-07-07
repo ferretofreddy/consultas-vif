@@ -114,7 +114,7 @@ module.exports = {
           ...informe._doc,
           _id: informe.id,
           nInforme: informe.nInforme,
-          f_informe: new Date(informe._doc.f_informe).toISOString().toLocaleDateString(),
+          f_informe: new Date(informe._doc.f_informe).toLocaleDateString(),
           aprehendido: informe.aprehendido,
           casoCLAIS: informe.casoCLAIS,
           decA_Blanca: informe.decA_Blanca,
@@ -124,8 +124,8 @@ module.exports = {
           casoPorDesovediencia: informe.casoPorDesovediencia,
           imputado: persona.bind(this, informe.imputado),
           ofendido: persona.bind(this, informe.ofendido),
-          createdAt: new Date(informe._doc.createdAt).toISOString().toLocaleDateString(),
-          updatedAt: new Date(informe._doc.updatedAt).toISOString().toLocaleDateString()
+          createdAt: new Date(informe._doc.createdAt).toLocaleDateString(),
+          updatedAt: new Date(informe._doc.updatedAt).toLocaleDateString()
         }
       })
     } catch (err) {
@@ -144,7 +144,7 @@ module.exports = {
         ...informe._doc,
         _id: informe.id,
         nInforme: informe.nInforme,
-        f_informe: new Date(informe._doc.f_informe).toISOString().toLocaleDateString(),
+        f_informe: new Date(informe._doc.f_informe).toLocaleDateString(),
         aprehendido: informe.aprehendido,
         casoCLAIS: informe.casoCLAIS,
         decA_Blanca: informe.decA_Blanca,
@@ -172,7 +172,7 @@ module.exports = {
         ...informe._doc,
         _id: informe.id,
         nInforme: informe.nInforme,
-        f_informe: new Date(informe._doc.f_informe).toLocaleDateString(),
+        f_informe: new Date(informe._doc.f_informe).toISOString(),
         aprehendido: informe.aprehendido,
         casoCLAIS: informe.casoCLAIS,
         decA_Blanca: informe.decA_Blanca,
@@ -182,8 +182,8 @@ module.exports = {
         casoPorDesovediencia: informe.casoPorDesovediencia,
         imputado: persona.bind(this, informe.imputado),
         ofendido: persona.bind(this, informe.ofendido),
-        createdAt: new Date(informe._doc.createdAt).toLocaleDateString(),
-        updatedAt: new Date(informe._doc.updatedAt).toLocaleDateString()
+        createdAt: new Date(informe._doc.createdAt).toISOString(),
+        updatedAt: new Date(informe._doc.updatedAt).toISOString()
       }
     } catch (err) {
       console.log(err)

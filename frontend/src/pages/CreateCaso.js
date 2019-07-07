@@ -304,7 +304,7 @@ class CreateCasoPage extends Component {
     event.preventDefault();
     const nombre = this.nombreEl.current.value;
     const PersonaIdentificacion = this.PersonaIdentificacionEl.current.value;
-    const f_nacimiento = new Date(this.f_nacimientoEl.current.value).toISOString();
+    const f_nacimiento = this.f_nacimientoEl.current.value;
     const sexo = this.sexoEl.current.value;
     const edad = +this.edadEl.current.value;
     const provincia = this.provinciaEl.current.value;
@@ -434,7 +434,9 @@ class CreateCasoPage extends Component {
         <button className="findPersonaBtnCrear" type="button" onClick={this.crearOfendido}>Crear ofendido</button>
       </div>
     } else {
-      campoOfendido = <button className="findPersonBtn" onClick={this.buscarOfendido}>Buscar ofendido</button>
+      campoOfendido = <div className="findPersonDiv">
+        <button className="findPersonBtn" onClick={this.buscarOfendido}>Buscar ofendido</button>
+      </div>
     }
 
     return (

@@ -61,10 +61,10 @@ class App extends Component {
                 <Route path="/createcaso" component={CreateCasoPage} />
               )}
               {this.state.token && (
-                <Route path="/updatecaso" component={UpdateCasoPage} />
+                <Route path="/createinforme" component={CreateInformePage} />
               )}
               {this.state.token && (
-                <Route path="/createinforme" component={CreateInformePage} />
+                <Route path="/updatecaso" component={UpdateCasoPage} />
               )}
               {!this.state.token && <Redirect to="/login" exact />}
             </Switch>

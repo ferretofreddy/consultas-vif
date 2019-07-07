@@ -30,9 +30,7 @@ const Menu = props => (
                   <ul className="menuNav2NdUl">
                     <li className="menuNavSecondLi">
                       <NavLink className="menu-item" to="/createcaso">Crear Expediente</NavLink>
-                    </li>
-                    <li className="menuNavSecondLi">
-                      <NavLink className="menu-item" to="/updatecaso">Modificar Expediente</NavLink>
+                      <NavLink className="menu-item" to="/updatecaso">modificar Expediente</NavLink>
                     </li>
                   </ul>
                 </li>
@@ -61,6 +59,7 @@ const Menu = props => (
                   <ul className="menuNav2NdUl">
                     <li className="menuNavSecondLi">
                       <NavLink className="menu-item" to="/createcaso">Crear Expediente</NavLink>
+                      <NavLink className="menu-item" to="/updatecaso">modificar Expediente</NavLink>
                     </li>
                   </ul>
                 </li>

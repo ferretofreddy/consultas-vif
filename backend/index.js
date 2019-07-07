@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const graphqlHttp = require('express-graphql')
 const mongoose = require('mongoose')
+const path = require('path')
 
 const graphQlSchema = require('./graphql/schema/index')
 const graphQlResolvers = require('./graphql/resolvers/index')
@@ -32,6 +33,12 @@ app.use(
     graphiql: true
   })
 )
+
+app.use(express.static(path.join(__dirname, 'build')))
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
 
 mongoose
   .connect(

@@ -198,9 +198,9 @@ module.exports = {
   },
 
   editarCaso: async ({ expediente, juzgado, notifImputado, f_notifImputado, notifOfendido, f_notifOfendido, desalojo, cambioDomicilioVict, medidasProteccion, f_emisionMedidas }, req) => {
-    if (!req.isAuth) {
+    /* if (!req.isAuth) {
       throw new Error('Acceso Denegado!')
-    }
+    } */
     try {
       const caso = await Caso.findOneAndUpdate({ expediente: expediente }, { $set: { juzgado: juzgado, notifImputado: notifImputado, f_notifImputado: f_notifImputado, notifOfendido: notifOfendido, f_notifOfendido: f_notifOfendido, desalojo: desalojo, cambioDomicilioVict: cambioDomicilioVict, medidasProteccion: medidasProteccion, f_emisionMedidas: f_emisionMedidas } }, { new: true })
       return {
@@ -209,17 +209,17 @@ module.exports = {
         expediente: caso.expediente,
         juzgado: caso.juzgado,
         notifImputado: caso.notifImputado,
-        f_notifImputado: new Date(caso._doc.f_notifImputado).toLocaleDateString(),
+        f_notifImputado: new Date(caso._doc.f_notifImputado).toISOString(),
         notifOfendido: caso.notifOfendido,
-        f_notifOfendido: new Date(caso._doc.f_notifOfendido).toLocaleDateString(),
+        f_notifOfendido: new Date(caso._doc.f_notifOfendido).toISOString(),
         desalojo: caso.desalojo,
         cambioDomicilioVict: caso.cambioDomicilioVict,
         medidasProteccion: caso.medidasProteccion,
-        f_emisionMedidas: new Date(caso._doc.f_emisionMedidas).toLocaleDateString(),
+        f_emisionMedidas: new Date(caso._doc.f_emisionMedidas).toISOString(),
         imputado: persona.bind(this, caso.imputado),
         ofendido: persona.bind(this, caso.ofendido),
-        createdAt: new Date(caso._doc.createdAt).toLocaleDateString(),
-        updatedAt: new Date(caso._doc.updatedAt).toLocaleDateString()
+        createdAt: new Date(caso._doc.createdAt).toISOString(),
+        updatedAt: new Date(caso._doc.updatedAt).toISOString()
       }
     } catch (err) {
       console.log(err)
@@ -240,13 +240,13 @@ module.exports = {
       expediente: args.casoInput.expediente,
       juzgado: args.casoInput.juzgado,
       notifImputado: args.casoInput.notifImputado,
-      f_notifImputado: args.casoInput.f_notifImputado,
+      f_notifImputado: new Date(args.casoInput.f_notifImputado).toISOString(),
       notifOfendido: args.casoInput.notifOfendido,
-      f_notifOfendido: args.casoInput.f_notifOfendido,
+      f_notifOfendido: new Date(args.casoInput.f_notifOfendido).toISOString(),
       desalojo: args.casoInput.desalojo,
       cambioDomicilioVict: args.casoInput.cambioDomicilioVict,
       medidasProteccion: args.casoInput.medidasProteccion,
-      f_emisionMedidas: args.casoInput.f_emisionMedidas,
+      f_emisionMedidas: new Date(args.casoInput.f_emisionMedidas).toISOString(),
       imputado: args.casoInput.imputado,
       ofendido: args.casoInput.ofendido
     })

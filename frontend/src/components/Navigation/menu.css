@@ -144,22 +144,25 @@ li.menuNavParentLi:hover > ul.menuNav2NdUl{
   background: transparent;
   color: transparent;
 }
-.menuNav2NdUl:hover {
-  background: rgba(53, 53, 53, 1);
-  color: rgba(255, 255, 255, 1);
-  margin-left: 20px;
-  transition: 0.5s;
-}
+
 .menuNavSecondLi {
   padding: 0;
 }
 .menu-item {
+  margin: 5px 0px;
+  padding: 4px 0px;
   display: block;
   width: 100%;
   text-decoration: none;
   font-size: 16px;
   text-align: left;
   color: rgba(255, 255, 255, 1);
+}
+.menu-item:hover {
+  background: rgba(53, 53, 53, 1);
+  color: rgba(255, 255, 255, 1);
+  margin-left: 20px;
+  transition: 0.5s;
 }
 .menuSesion {
   display: block;
