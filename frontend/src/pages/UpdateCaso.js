@@ -352,9 +352,9 @@ class UpadateCasoPage extends Component {
 
         {this.state.sinResultados && (
           <div className="container">
-            <div className="findSecond2Div">
-              <p>No se encuentran registros asociados a ese número de identificación</p>
-              <button className="" onClick={this.EditarNuevoCaso}>Actualizar Otro</button>
+            <div className="findMain1Div">
+              <p className="newCasoFormP">No se encuentran registros asociados a ese número de Expediente</p>
+              <button className="newCasoFormFindNew" onClick={this.EditarNuevoCaso}>Buscar nuevamente</button>
             </div>
           </div>
         )}

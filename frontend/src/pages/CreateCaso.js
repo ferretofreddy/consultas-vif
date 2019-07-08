@@ -17,6 +17,7 @@ class CreateCasoPage extends Component {
     CreateOfendido: false,
     OfendidoNonData: false,
     Result: false,
+    Duplicado: false,
     imputadoId: null,
     imputadoIdentificacion: null,
     ofendidoId: null,
@@ -88,6 +89,8 @@ class CreateCasoPage extends Component {
     event.preventDefault();
     this.setState({
       Result: false,
+      Duplicado: false,
+      expediente: null, 
       NewCaso: true,
       imputadoId: null,
       imputadoIdentificacion: null,
@@ -172,7 +175,8 @@ class CreateCasoPage extends Component {
     })
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Error de servidor!');
+          this.setState({ Duplicado: true, expediente: this.expedienteEl.current.value });
+          throw new Error('Error del servidor');
         }
         return res.json();
       })
@@ -503,7 +507,7 @@ class CreateCasoPage extends Component {
               <legend className="casoFindLegend">Buscar Imputado</legend>
               <form className="findForm" onSubmit={this.buscarPersonaHandler}>
                 <span className="findFormSpan">Ingrese identificación del imputado:</span>
-                <input type="text" className="findFormInput" autoFocus="true" ref={this.PersonaIdentificacionEl} />
+                <input type="text" className="findFormInput" autoFocus={true} ref={this.PersonaIdentificacionEl} />
                 <button className="findFormSubmit" type="submit">Buscar</button>
               </form>
             </div>
@@ -624,6 +628,17 @@ class CreateCasoPage extends Component {
             <form className="">
               <div className="">
                 <label className="">El expediente {this.state.expediente}, ha sido guardado...</label>
+                <button className="" onClick={this.nuevoCaso}>Nuevo expediente</button>
+              </div>
+            </form>
+          </div>
+        )}
+
+        {this.state.Duplicado && (
+          <div className="container">
+            <form className="">
+              <div className="">
+                <label className="">Ya existe un registro con el número de expediente: {this.state.expediente}</label>
                 <button className="" onClick={this.nuevoCaso}>Nuevo expediente</button>
               </div>
             </form>
