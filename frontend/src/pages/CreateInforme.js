@@ -25,14 +25,14 @@ class CreateInformePage extends Component {
     f_informe: null,
     imputadoNombre: null,
     ofendidoNombre: null,
-// checkBoxs del formulario
-    aprehendidoCh:false,
-    casoCLAISCh:false,
-    decA_BlancaCh:false,
-    decA_FuegoCh:false,
-    trasladoFiscaliaCh:false,
-    primerizoCh:false,
-    casoPorDesovedienciaCh:false
+    // checkBoxs del formulario
+    aprehendidoCh: false,
+    casoCLAISCh: false,
+    decA_BlancaCh: false,
+    decA_FuegoCh: false,
+    trasladoFiscaliaCh: false,
+    primerizoCh: false,
+    casoPorDesovedienciaCh: false
   };
 
   isActive = true;
@@ -54,32 +54,32 @@ class CreateInformePage extends Component {
     this.direccionEl = React.createRef();
 
   }
-    // modificar estados de los checkbox
+  // modificar estados de los checkbox
   cambioAprehendido = () => {
     this.setState({
       aprehendidoCh: !this.state.aprehendidoCh,
     });
     console.log(this.state.aprehendidoCh);
   }
-  
+
   cambioCasoCLAIS = () => {
     this.setState({
       casoCLAISCh: !this.state.casoCLAISCh,
     });
   }
-  
+
   cambioDecA_Blanca = () => {
     this.setState({
       decA_BlancaCh: !this.state.decA_BlancaCh,
     });
   }
-  
+
   cambioDecA_Fuego = () => {
     this.setState({
       decA_FuegoCh: !this.state.decA_FuegoCh,
     });
   }
-  
+
   cambioTrasladoFiscalia = () => {
     this.setState({
       trasladoFiscaliaCh: !this.state.trasladoFiscaliaCh,
@@ -97,27 +97,27 @@ class CreateInformePage extends Component {
       casoPorDesovedienciaCh: !this.state.casoPorDesovedienciaCh,
     });
   }
-    // Manejador de eventos Nuevo informe para crear nuevo informe
+  // Manejador de eventos Nuevo informe para crear nuevo informe
   nuevoInforme = event => {
     event.preventDefault();
-    this.setState({ 
+    this.setState({
       Result: false,
       NewInforme: true,
       imputadoId: null,
       imputadoIdentificacion: null,
       ofendidoId: null,
       ofendidoIdentificacion: null,
-      aprehendidoCh:false,
-      casoCLAISCh:false,
-      decA_BlancaCh:false,
-      decA_FuegoCh:false,
-      trasladoFiscaliaCh:false,
-      primerizoCh:false,
-      casoPorDesovedienciaCh:false
+      aprehendidoCh: false,
+      casoCLAISCh: false,
+      decA_BlancaCh: false,
+      decA_FuegoCh: false,
+      trasladoFiscaliaCh: false,
+      primerizoCh: false,
+      casoPorDesovedienciaCh: false
     });
   };
 
-    // Manejador de eventos Crear Caso Query
+  // Manejador de eventos Crear Caso Query
   CrearInformeHandler = event => {
     event.preventDefault();
     const nInforme = this.nInformeEl.current.value;
@@ -218,19 +218,19 @@ class CreateInformePage extends Component {
       });
   };
 
-    // Modificador de estado en click buscar Imputado
+  // Modificador de estado en click buscar Imputado
   buscarImputado = event => {
     event.preventDefault();
     this.setState({ FindImputado: true, NewInforme: false });
   };
 
-      // Modificador de estado en click buscar Ofendido
+  // Modificador de estado en click buscar Ofendido
   buscarOfendido = event => {
     event.preventDefault();
     this.setState({ FindOfendido: true, NewInforme: false });
   };
 
-    // Manejador de eventos para buscar personas Query
+  // Manejador de eventos para buscar personas Query
   buscarPersonaHandler = event => {
     event.preventDefault();
     const personaIdentificacion = this.PersonaIdentificacionEl.current.value;
@@ -313,19 +313,19 @@ class CreateInformePage extends Component {
       });
   };
 
-        // Modificador de estado en click Crear Imputado
+  // Modificador de estado en click Crear Imputado
   crearImputado = event => {
     event.preventDefault();
     this.setState({ CreateImputado: true, ImputadoNonData: false, NewInforme: false });
   };
 
-        // Modificador de estado en click Crear Ofendido
+  // Modificador de estado en click Crear Ofendido
   crearOfendido = event => {
     event.preventDefault();
     this.setState({ CreateOfendido: true, OfendidoNonData: false, NewInforme: false });
   };
 
-        // Manejador de eventos para crear persona Query
+  // Manejador de eventos para crear persona Query
   crearPersonaHandler = event => {
     event.preventDefault();
     const nombre = this.nombreEl.current.value;
@@ -461,7 +461,7 @@ class CreateInformePage extends Component {
         <button className="findPersonaBtnBuscar" onClick={this.buscarOfendido}>Buscar Ofendido</button>
         <button className="findPersonaBtnCrear" type="button" onClick={this.crearOfendido}>Crear Ofendido</button>
       </div>
-    }else {
+    } else {
       campoOfendido = <div className="findPersonDiv">
         <button className="findPersonBtn" onClick={this.buscarOfendido}>Buscar ofendido</button>
       </div>
@@ -497,7 +497,7 @@ class CreateInformePage extends Component {
                 <span className="newCasoFormSpan">Es caso CLAIS</span>
               </div>
               <div className="newCasoFormGroup">
-                <input checked={this.state.decA_BlancaCh} onChange={this.cambioDecA_Blanca}  className="newCasoFormCheck" type="checkbox" label="Decomiso de arma blanca" />
+                <input checked={this.state.decA_BlancaCh} onChange={this.cambioDecA_Blanca} className="newCasoFormCheck" type="checkbox" label="Decomiso de arma blanca" />
                 <span className="newCasoFormSpan">Decomiso de arma blanca</span>
               </div>
               <div className="newCasoFormGroup">
@@ -505,15 +505,15 @@ class CreateInformePage extends Component {
                 <span className="newCasoFormSpan">Decomiso de arma de fuego</span>
               </div>
               <div className="newCasoFormGroup">
-                <input checked={this.state.trasladoFiscaliaCh} onChange={this.cambioTrasladoFiscalia} className="newCasoFormCheck" type="checkbox" label="Imputado trasladado a fiscalia"  />
+                <input checked={this.state.trasladoFiscaliaCh} onChange={this.cambioTrasladoFiscalia} className="newCasoFormCheck" type="checkbox" label="Imputado trasladado a fiscalia" />
                 <span className="newCasoFormSpan">Imputado trasladado a fiscalia</span>
               </div>
               <div className="newCasoFormGroup">
-                <input checked={this.state.primerizoCh} onChange={this.cambioPrimerizo}  className="newCasoFormCheck" type="checkbox" label="Es primerizo" />
+                <input checked={this.state.primerizoCh} onChange={this.cambioPrimerizo} className="newCasoFormCheck" type="checkbox" label="Es primerizo" />
                 <span className="newCasoFormSpan">Es primerizo</span>
               </div>
               <div className="newCasoFormGroup">
-                <input checked={this.state.casoPorDesovedienciaCh} onChange={this.cambioCasoPorDesovediencia}  className="newCasoFormCheck" type="checkbox" label="Es caso por desobediencia" />
+                <input checked={this.state.casoPorDesovedienciaCh} onChange={this.cambioCasoPorDesovediencia} className="newCasoFormCheck" type="checkbox" label="Es caso por desobediencia" />
                 <span className="newCasoFormSpan">Es caso por desobediencia</span>
               </div>
               <button className="newCasoFormSubmit" type="submit">Guardar</button>

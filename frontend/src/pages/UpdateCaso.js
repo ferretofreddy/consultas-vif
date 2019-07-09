@@ -24,7 +24,7 @@ class UpadateCasoPage extends Component {
     medidasCh: null,
     buscarExpediente: true,
     modificarExpediente: false,
-    Result: false,
+    Resultado: false,
     sinResultados: false
   };
   isActive = true;
@@ -44,7 +44,7 @@ class UpadateCasoPage extends Component {
     this.setState({
       desalojoCh: !this.state.desalojoCh,
     });
-  };
+  }
 
   cambioDomicilio = () => {
     this.setState({
@@ -86,7 +86,7 @@ class UpadateCasoPage extends Component {
       medidasCh: null,
       buscarExpediente: true,
       modificarExpediente: false,
-      Result: false,
+      Resultado: false,
       sinResultados: false
     });
   };
@@ -140,8 +140,9 @@ class UpadateCasoPage extends Component {
           this.setState({ 
             buscarExpediente: false,
             modificarExpediente: false,
-            Result: false,
-            sinResultados: true });
+            Resultado: false,
+            sinResultados: true 
+          });
         }
         const Id = resData.data.expediente._id;
         const expediente = resData.data.expediente.expediente;
@@ -172,7 +173,7 @@ class UpadateCasoPage extends Component {
             f_emisionMedidas: f_emisionMedidas,
             buscarExpediente: false,
             modificarExpediente: true,
-            Result: false,
+            Resultado: false,
             sinResultados: false 
           });
         }
@@ -184,7 +185,7 @@ class UpadateCasoPage extends Component {
         this.setState({ 
           buscarExpediente: false,
           modificarExpediente: false,
-          Result: false,
+          Resultado: false,
           sinResultados: true  });
       });
   };
@@ -252,7 +253,7 @@ class UpadateCasoPage extends Component {
           this.setState({ 
             buscarExpediente: false,
             modificarExpediente: false,
-            Result: false,
+            Resultado: false,
             sinResultados: true });
         }
         if (this.isActive) {
@@ -260,7 +261,7 @@ class UpadateCasoPage extends Component {
             expediente: expediente,
             buscarExpediente: false,
             modificarExpediente: false,
-            Result: true,
+            Resultado: true,
             sinResultados: false
           });
         }
@@ -271,7 +272,7 @@ class UpadateCasoPage extends Component {
           expediente: expediente,
           buscarExpediente: false,
           modificarExpediente: false,
-          Result: false,
+          Resultado: false,
           sinResultados: true
         });
       });
@@ -359,7 +360,7 @@ class UpadateCasoPage extends Component {
           </div>
         )}
 
-        {this.state.Result && (
+        {this.state.Resultado && (
           <div className="container">
             <form className="">
               <div className="">

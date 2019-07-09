@@ -135,9 +135,9 @@ module.exports = {
   },
 
   numInforme: async ({ nInforme }, req) => {
-    if (!req.isAuth) {
+    /* if (!req.isAuth) {
       throw new Error('Acceso Denegado!')
-    }
+    } */
     try {
       const informe = await Informe.findOne({ nInforme: nInforme })
       return {
