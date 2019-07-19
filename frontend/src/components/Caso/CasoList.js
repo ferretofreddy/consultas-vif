@@ -23,7 +23,7 @@ const casoList = props => {
       <thead className="findInformeTableHeader">
         <tr className="findInformeTableHeaderRow">
           <th className="findInformeTableHeaderRowC1">Expediente N°</th>
-          <th className="findInformeTableHeaderRowC2">Nombre del agresor</th>
+          <th className="findInformeTableHeaderRowC2">Presunto agresor</th>
           <th className="findInformeTableHeaderRowC3">Nombre de la víctima</th>
         </tr>
       </thead>

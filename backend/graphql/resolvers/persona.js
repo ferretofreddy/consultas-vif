@@ -115,7 +115,7 @@ module.exports = {
           _id: persona.id,
           nombre: persona.nombre,
           identificacion: persona.identificacion,
-          f_nacimiento: new Date(persona._doc.f_nacimiento).toLoca.toLocaleDateString(),
+          f_nacimiento: new Date(persona._doc.f_nacimiento).toLocaleDateString(),
           sexo: persona.sexo,
           edad: persona.edad,
           provincia: persona.provincia,
@@ -124,8 +124,8 @@ module.exports = {
           direccion: persona.direccion,
           casos: casos.bind(this, persona._doc.casos),
           informes: informes.bind(this, persona._doc.informes),
-          createdAt: new Date(persona._doc.createdAt).toLoca.toLocaleDateString(),
-          updatedAt: new Date(persona._doc.updatedAt).toLoca.toLocaleDateString()
+          createdAt: new Date(persona._doc.createdAt).toLocaleDateString(),
+          updatedAt: new Date(persona._doc.updatedAt).toLocaleDateString()
         }
       })
     } catch (err) {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Form, Button, Card, Col } from 'react-bootstrap';
 
 import './CreateUser.css';
 import AuthContext from '../context/auth-context';
@@ -79,48 +78,45 @@ class CreateUserPage extends Component {
         <Menu />
 
         <div className='container'>
-          <Card.Header><h2>Crear nuevo Usuario</h2></Card.Header>
-          <Card.Body>
-            <Form onSubmit={this.submitHandler} >
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Correo electrónico</Form.Label>
-                  <Form.Control as='input' id="email" type="email" ref={this.emailEl} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Contraseña</Form.Label>
-                  <Form.Control as='input' id="password" type="password" ref={this.passwordEl} />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Row>
-                <Form.Group as={Col} >
-                  <Form.Label>Identificacion</Form.Label>
-                  <Form.Control as='input' id="identificacion" type="text" ref={this.identificacionEl} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Nombre</Form.Label>
-                  <Form.Control as='input' id="name" type="text" ref={this.nameEl} />
-                </Form.Group>
-
-                <Form.Group as={Col} >
-                  <Form.Label>Roll</Form.Label>
-                  <Form.Control as="select" id="roll" ref={this.rollEl}>
+          <div className='FormHeader'>
+            <h2 className='FormHeaderH2'>Crear nuevo Usuario</h2>
+          </div>
+          <div className='FormBody'>
+            <form className='FormSubmit' onSubmit={this.submitHandler} >
+              <div className='FormBodyRow'>
+                <div className='FormBodyGroup'>
+                  <span>Correo electrónico</span>
+                  <input type="email" ref={this.emailEl} />
+                </div>
+                <div className='FormBodyGroup'>
+                  <span>Contraseña</span>
+                  <input type="password" ref={this.passwordEl} />
+                </div>
+              </div>
+              <div className='FormBodyRow'>
+                <div className='FormBodyGroup'>
+                  <span>Identificacion</span>
+                  <input type="text" ref={this.identificacionEl} />
+                </div>
+                <div className='FormBodyGroup'>
+                  <span>Nombre</span>
+                  <input type="text" ref={this.nameEl} />
+                </div>
+                <div className='FormBodyGroup'>
+                  <span>Roll</span>
+                  <select ref={this.rollEl}>
                     <option>Seleccione</option>
                     <option>Administrador</option>
                     <option>AgentePPP</option>
                     <option>Oficialia</option>
-                  </Form.Control>
-                </Form.Group>
-              </Form.Row>
-
-              <Button variant="outline-primary" type="submit">
+                  </select>
+                </div>
+              </div>
+              <button className='CreateFormBtn' type="submit">
                 Crear usuario
-            </Button>
-            </Form>
-          </Card.Body>
+              </button>
+            </form>
+          </div>
         </div>
       </React.Fragment>
     );

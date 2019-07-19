@@ -137,11 +137,11 @@ class UpadateCasoPage extends Component {
       })
       .then(resData => {
         if (resData === null) {
-          this.setState({ 
+          this.setState({
             buscarExpediente: false,
             modificarExpediente: false,
             Resultado: false,
-            sinResultados: true 
+            sinResultados: true
           });
         }
         const Id = resData.data.expediente._id;
@@ -174,7 +174,7 @@ class UpadateCasoPage extends Component {
             buscarExpediente: false,
             modificarExpediente: true,
             Resultado: false,
-            sinResultados: false 
+            sinResultados: false
           });
         }
         console.log(this.state.cambioDomicilioCh);
@@ -182,11 +182,12 @@ class UpadateCasoPage extends Component {
       })
       .catch(err => {
         console.log(err);
-        this.setState({ 
+        this.setState({
           buscarExpediente: false,
           modificarExpediente: false,
           Resultado: false,
-          sinResultados: true  });
+          sinResultados: true
+        });
       });
   };
 
@@ -250,11 +251,12 @@ class UpadateCasoPage extends Component {
       .then(resData => {
         const expediente = resData.data.editarCaso.expediente;
         if (resData === null) {
-          this.setState({ 
+          this.setState({
             buscarExpediente: false,
             modificarExpediente: false,
             Resultado: false,
-            sinResultados: true });
+            sinResultados: true
+          });
         }
         if (this.isActive) {
           this.setState({
@@ -305,7 +307,7 @@ class UpadateCasoPage extends Component {
         {this.state.modificarExpediente && (
           <div className="container">
             <form className="newCasoForm" onSubmit={this.UpdateCasoHandler}>
-              <legend className="newCasoFormLegend">Nuevo Expediente Judicial</legend>
+              <legend className="newCasoFormLegend">Actualizar expediente judicial</legend>
               <div className="newCasoFormGroup">
                 <span className="newCasoFormLabel">Expediente</span>
                 <input className="newCasoFormInput" type="text" defaultValue={this.state.expediente} ref={this.expedienteEl} />
@@ -362,12 +364,10 @@ class UpadateCasoPage extends Component {
 
         {this.state.Resultado && (
           <div className="container">
-            <form className="">
-              <div className="">
-                <label className="">El expediente {this.state.expediente}, ha sido actualizado...</label>
-                <button className="" onClick={this.EditarNuevoCaso}>Actualizar Otro</button>
-              </div>
-            </form>
+            <div className="findMain1Div">
+              <p className="newCasoFormP">El expediente {this.state.expediente}, ha sido actualizado...</p>
+              <button className="newCasoFormFindNew" onClick={this.EditarNuevoCaso}>Actualizar Otro</button>
+            </div>
           </div>
         )}
       </React.Fragment>

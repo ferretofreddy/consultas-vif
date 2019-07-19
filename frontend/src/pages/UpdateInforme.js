@@ -149,16 +149,16 @@ class UpdateInformePage extends Component {
             sinResultados: true
           });
         }
-        const nInforme
-        const f_informe
-        const aprehendido
-        const casoCLAIS
-        const decA_Blanca
-        const decA_Fuego
-        const trasladoFiscalia
-        const primerizo
-        const casoPorDesovediencia
-
+        const Id = resData.data.numInforme._id
+        const nInforme = resData.data.numInforme.nInforme;
+        const f_informe = resData.data.numInforme.f_informe;
+        const aprehendido = resData.data.numInforme.aprehendido;
+        const casoCLAIS = resData.data.numInforme.casoCLAIS;
+        const decA_Blanca = resData.data.numInforme.decA_Blanca;
+        const decA_Fuego = resData.data.numInforme.decA_Fuego;
+        const trasladoFiscalia = resData.data.numInforme.trasladoFiscalia;
+        const primerizo = resData.data.numInforme.primerizo;
+        const casoPorDesovediencia = resData.data.numInforme.casoPorDesovediencia;
         console.log(resData.data.numInforme.nInforme);
 
         if (this.isActive) {
@@ -173,6 +173,10 @@ class UpdateInformePage extends Component {
             trasladoFiscaliaCh: trasladoFiscalia,
             primerizoCh: primerizo,
             casoPorDesovedienciaCh: casoPorDesovediencia,
+            buscarInforme: false,
+            modificarInforme: true,
+            Resultado: false,
+            sinResultados: false
           });
         }
         console.log(this.state.nInforme);
@@ -190,41 +194,39 @@ class UpdateInformePage extends Component {
   // manejador de evento Actualizar informe Query
   UpdateInformeHandler = event => {
     event.preventDefault();
-    const expediente = this.expedienteEl.current.value;
-    const juzgado = this.juzgadoEl.current.value;
-    const notifImputado = this.state.notifImputadoCh;
-    const f_notifImputado = this.f_notifImputadoEl.current.value;
-    const notifOfendido = this.state.notifOfendidoCh;
-    const f_notifOfendido = this.f_notifOfendidoEl.current.value;
-    const desalojo = this.state.desalojoCh;
-    const cambioDomicilioVict = this.state.cambioDomicilioCh;
-    const medidasProteccion = this.state.medidasCh;
-    const f_emisionMedidas = this.f_emisionMedidasEl.current.value;
+    const nInforme = this.state.nInforme;
+    const f_informe = this.f_informeEl.current.value;
+    const aprehendido = this.state.aprehendidoCh;
+    const casoCLAIS = this.state.casoCLAISCh;
+    const decA_Blanca = this.state.decA_BlancaCh;
+    const decA_Fuego = this.state.decA_FuegoCh;
+    const trasladoFiscalia = this.state.trasladoFiscaliaCh;
+    const primerizo = this.state.primerizoCh;
+    const casoPorDesovediencia = this.state.casoPorDesovedienciaCh;
 
-    if (expediente.trim().length === 0 || juzgado.trim().length === 0) {
+    if (nInforme.trim().length === 0) {
       return;
     }
 
     const requestBody = {
       query: `
-          mutation EditarCaso($expediente: String!, $juzgado: String!, $notifImputado: Boolean, $f_notifImputado: String, $notifOfendido: Boolean, $f_notifOfendido: String, $desalojo: Boolean, $cambioDomicilioVict: Boolean, $medidasProteccion: Boolean, $f_emisionMedidas: String) {
-            editarCaso(expediente: $expediente, juzgado: $juzgado, notifImputado: $notifImputado, f_notifImputado: $f_notifImputado, notifOfendido: $notifOfendido, f_notifOfendido: $f_notifOfendido, desalojo: $desalojo, cambioDomicilioVict: $cambioDomicilioVict, medidasProteccion: $medidasProteccion,f_emisionMedidas: $f_emisionMedidas){
-              expediente
+          mutation EditarInforme($nInforme: String!, $f_informe: String!, $aprehendido: Boolean!, $casoCLAIS: Boolean!, $decA_Blanca: Boolean!, $decA_Fuego: Boolean!, $trasladoFiscalia: Boolean!, $primerizo: Boolean!, $casoPorDesovediencia: Boolean!){
+            editarInforme(nInforme: $nInforme, f_informe: $f_informe, aprehendido: $aprehendido, casoCLAIS: $casoCLAIS, decA_Blanca: $decA_Blanca, decA_Fuego: $decA_Fuego, trasladoFiscalia: $trasladoFiscalia, primerizo: $primerizo, casoPorDesovediencia: $casoPorDesovediencia){
+              nInforme
             }
           }
         `,
 
       variables: {
-        expediente: expediente,
-        juzgado: juzgado,
-        notifImputado: notifImputado,
-        f_notifImputado: f_notifImputado,
-        notifOfendido: notifOfendido,
-        f_notifOfendido: f_notifOfendido,
-        desalojo: desalojo,
-        cambioDomicilioVict: cambioDomicilioVict,
-        medidasProteccion: medidasProteccion,
-        f_emisionMedidas: f_emisionMedidas,
+        nInforme: nInforme,
+        f_informe: f_informe,
+        aprehendido: aprehendido,
+        casoCLAIS: casoCLAIS,
+        decA_Blanca: decA_Blanca,
+        decA_Fuego: decA_Fuego,
+        trasladoFiscalia: trasladoFiscalia,
+        primerizo: primerizo,
+        casoPorDesovediencia: casoPorDesovediencia
       }
     }
 
@@ -245,20 +247,20 @@ class UpdateInformePage extends Component {
         return res.json();
       })
       .then(resData => {
-        const expediente = resData.data.editarCaso.expediente;
+        const nInforme = resData.data.editarInforme.nInforme;
         if (resData === null) {
           this.setState({
-            buscarExpediente: false,
-            modificarExpediente: false,
+            buscarInforme: false,
+            modificarInforme: false,
             Resultado: false,
             sinResultados: true
           });
         }
         if (this.isActive) {
           this.setState({
-            expediente: expediente,
-            buscarExpediente: false,
-            modificarExpediente: false,
+            nInforme: nInforme,
+            buscarInforme: false,
+            modificarInforme: false,
             Resultado: true,
             sinResultados: false
           });
@@ -267,9 +269,9 @@ class UpdateInformePage extends Component {
       .catch(err => {
         console.log(err);
         this.setState({
-          expediente: expediente,
-          buscarExpediente: false,
-          modificarExpediente: false,
+          nInforme: nInforme,
+          buscarInforme: false,
+          modificarInforme: false,
           Resultado: false,
           sinResultados: true
         });
@@ -278,6 +280,88 @@ class UpdateInformePage extends Component {
 
   componentWillUnmount() {
     this.isActive = false;
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <Menu />
+        {this.state.buscarInforme && (
+          <div className="container">
+            <div className="findMain1Div">
+              <form className="findForm" onSubmit={this.findInformeHandler}>
+                <span className="findFormSpan">
+                  Informe:
+                  </span>
+                <input type="text" className="findFormInput" autoFocus={true} ref={this.nInformeEl} />
+                <button className="findFormSubmit" type="submit" onClick={this.findInformeHandler}>
+                  Buscar
+              </button>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {this.state.modificarInforme && (
+          <div className="container">
+            <form className="newCasoForm" onSubmit={this.UpdateInformeHandler}>
+              <legend className="newCasoFormLegend">Actualizar informe policial {this.state.nInforme}</legend>
+              <div className="newCasoFormGroup">
+                <span className="newCasoFormLabel">Fecha de informe</span>
+                <input className="newCasoFormInput" type="text" defaultValue={this.state.f_informe} ref={this.f_informeEl} />
+              </div>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.aprehendidoCh} onChange={this.cambioAprehendido} className="newCasoFormCheck" type="checkbox" label="Imputado aprehendido" />
+                <span className="newCasoFormSpan">Imputado aprehendido</span>
+              </div>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.casoCLAISCh} onChange={this.cambioCasoCLAIS} className="newCasoFormCheck" type="checkbox" label="es caso CLAIS" />
+                <span className="newCasoFormSpan">es caso CLAIS</span>
+              </div>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.decA_BlancaCh} onChange={this.cambioDecA_Blanca} className="newCasoFormCheck" type="checkbox" label="Decomiso de arma blanca" />
+                <span className="newCasoFormSpan">Decomiso de arma blanca</span>
+              </div>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.decA_FuegoCh} onChange={this.cambioDecA_Fuego} className="newCasoFormCheck" type="checkbox" label="Decomiso de arma de fuego" />
+                <span className="newCasoFormSpan">Decomiso de arma de fuego</span>
+              </div>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.trasladoFiscaliaCh} onChange={this.cambioTrasladoFiscalia} className="newCasoFormCheck" type="checkbox" label="Aprehendido trasladado a fiscalía" />
+                <span className="newCasoFormSpan">Aprehendido trasladado a fiscalía</span>
+              </div>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.primerizoCh} onChange={this.cambioPrimerizo} className="newCasoFormCheck" type="checkbox" label="Aprehendido es primerizo" />
+                <span className="newCasoFormSpan">Aprehendido es primerizo</span>
+              </div>
+              <div className="newCasoFormGroup">
+                <input checked={this.state.casoPorDesovedienciaCh} onChange={this.cambioCasoPorDesovediencia} className="newCasoFormCheck" type="checkbox" label="Es caso por desobediencia" />
+                <span className="newCasoFormSpan">Es caso por desobediencia</span>
+              </div>
+              <button className="newCasoFormSubmit" type="submit">Actualizar</button>
+            </form>
+          </div>
+        )}
+
+        {this.state.sinResultados && (
+          <div className="container">
+            <div className="findMain1Div">
+              <p className="newCasoFormP">No se encuentran registros asociados a ese número de Informe</p>
+              <button className="newCasoFormFindNew" onClick={this.EditarNuevoInforme}>Buscar nuevamente</button>
+            </div>
+          </div>
+        )}
+
+        {this.state.Resultado && (
+          <div className="container">
+            <div className="findMain1Div">
+              <p className="newCasoFormP">El informe {this.state.nInforme}, ha sido actualizado...</p>
+              <button className="newCasoFormFindNew" onClick={this.EditarNuevoInforme}>Actualizar Otro</button>
+            </div>
+          </div>
+        )}
+      </React.Fragment>
+    )
   };
 }
 export default UpdateInformePage;

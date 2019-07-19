@@ -216,11 +216,11 @@ class FindPersonPage extends Component {
                 <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.medidasProteccion ? (new Date(this.state.selectedCaso.f_emisionMedidas).toLocaleDateString()) : ("Sin Datos")} />
               </div>
               <div className="findSecondPersonalesDivGroup" >
-                <span className="PersonalesGroupSpan">Nombre del Imputado</span>
+                <span className="PersonalesGroupSpan">Nombre del prevenido ó imputado</span>
                 <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.imputado.nombre} />
               </div>
               <div className="findSecondPersonalesDivGroup" >
-                <span className="PersonalesGroupSpan">Identificación del Imputado</span>
+                <span className="PersonalesGroupSpan">Identificación del prevenido ó iImputado</span>
                 <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedCaso.imputado.identificacion} />
               </div>
               <div className="findSecondPersonalesDivGroup" >
@@ -281,7 +281,7 @@ class FindPersonPage extends Component {
                 <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.casoCLAIS ? ("Es caso CLAIS") : ("No es caso CLAIS")} />
               </div>
               <div className="findSecondPersonalesDivGroup" >
-                <span className="PersonalesGroupSpan">Nombre del Imputado</span>
+                <span className="PersonalesGroupSpan">Nombre del imputado</span>
                 <input className="PersonalesGroupInput" readOnly defaultValue={this.state.selectedInforme.imputado.nombre} />
               </div>
               <div className="findSecondPersonalesDivGroup" >

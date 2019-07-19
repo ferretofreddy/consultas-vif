@@ -1,0 +1,65 @@
+/********************************************/
+/*  Resolucion de pantalla minima de 769px  */
+/********************************************/
+@media /* desktop */ (min-width: 769px) {
+  .FormHeader{
+    display: block;
+    width: 50%;
+    max-width: 600px;
+    margin: 20px auto;
+    margin-top: 30px;
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+  }
+  .FormHeaderH2{
+    text-align: center;
+    font-size: 32px;
+    letter-spacing: 6px;
+    margin: 0;
+    padding: 0;
+  }
+  .FormBody{
+    display: block;
+    width: 50%;
+    max-width: 600px;
+    margin: 10px auto;
+  }
+  .FormSubmit{
+    width: 100%;
+  }
+  .FormBodyGroup{
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+  }
+  .FormBodyGroup span{
+    display: block;
+    width: 50%;
+    box-sizing: border-box;
+    float: left;
+    text-align: inherit;
+    font-size: 25px;
+    letter-spacing: 2px;
+  }
+  .FormBodyGroup input, .FormBodyGroup select{
+    display: block;
+    width: 50%;
+    box-sizing: border-box;
+    font-size: 20px;
+    border-radius: 6px;
+    padding-left: 6px;
+  }
+  .CreateFormBtn{
+    display: block;
+    padding: 5px 10px;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 200px;
+    font-size: 24px;
+    color: white;
+    letter-spacing: 2px;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 8px;
+  }
+}
