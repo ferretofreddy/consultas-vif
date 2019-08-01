@@ -330,7 +330,7 @@ class FindPersonPage extends Component {
                 <span className="findFormSpan">
                   Identificación:
                 </span>
-                <input type="text" className="findFormInput" autoFocus={true} ref={this.identificacionEl} />
+                <input type="text" className="findFormInput" ref={this.identificacionEl} />
                 <button className="findFormSubmit" type="submit" onClick={this.submitHandler}>
                   Buscar
             </button>
@@ -373,7 +373,7 @@ class FindPersonPage extends Component {
                     </div>
 
                     <div className="findSecondPersonalesDivGroup">
-                      <span className="PersonalesGroupSpan">Dirección exacta</span>
+                      <span className="PersonalesGroupSpan">Domicilio</span>
                       <textarea type="textarea" className="PersonalesGroupTextArea" readOnly defaultValue={this.state.direccion} />
                     </div>
                   </div>

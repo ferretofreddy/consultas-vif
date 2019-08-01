@@ -107,15 +107,15 @@
   .loginFormInput {
     width: 100%;
     display: flex;
-    padding: 10px;
-    font-size: 24px;
-    border: solid 3px rgba(255, 255, 255, 1);
-    border-radius: 25px;
-  }
+    padding: 5px;
+    font-size: 25px;
+    border: solid 2px rgba(255, 255, 255, 1);
+    border-radius: 8px;
+}
 
   .loginFormBtn {
     width: 100%;
-    border-radius: 25px;
+    border-radius: 20px;
     border: solid 3px rgba(255, 255, 255, 1);
   }
 }

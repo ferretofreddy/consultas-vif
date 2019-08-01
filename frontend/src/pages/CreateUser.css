@@ -1,7 +1,4 @@
-/********************************************/
-/*  Resolucion de pantalla minima de 769px  */
-/********************************************/
-@media /* desktop */ (min-width: 769px) {
+
   .FormHeader{
     display: block;
     width: 50%;
@@ -41,7 +38,7 @@
     font-size: 25px;
     letter-spacing: 2px;
   }
-  .FormBodyGroup input, .FormBodyGroup select{
+  .FormBodyGroup input, .FormBodyGroup select, .FormBodyGroup textarea{
     display: block;
     width: 50%;
     box-sizing: border-box;
@@ -61,5 +58,66 @@
     background: transparent;
     border: 2px solid white;
     border-radius: 8px;
+    cursor: pointer;
   }
+/********************************************/
+/*  Resolucion de pantalla minima de 769px  */
+/********************************************/
+@media /* desktop */ (max-width: 769px) {
+  .FormHeader {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: 15px auto;
+    margin-top: 5px;
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+}
+.FormHeaderH2 {
+  text-align: center;
+  font-size: 24px;
+  letter-spacing: 2px;
+  margin: 0;
+  padding: 0;
+}
+.FormBody {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0px 5px;
+  max-width: 600px;
+  margin: 10px auto;
+}
+.FormBodyGroup span {
+  display: block;
+  box-sizing: border-box;
+  width: 50%;
+  box-sizing: border-box;
+  float: left;
+  text-align: inherit;
+  font-size: 20px;
+  letter-spacing: 0px;
+}
+.FormBodyGroup input, .FormBodyGroup select, .FormBodyGroup textarea {
+  display: block;
+  width: 50%;
+  box-sizing: border-box;
+  font-size: 20px;
+  border-radius: 6px;
+  padding-left: 5px;
+}
+.CreateFormBtn {
+  display: block;
+  padding: 8px 10px;
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 240px;
+  font-size: 20px;
+  color: white;
+  letter-spacing: 1px;
+  background: transparent;
+  border: 2px solid white;
+  border-radius: 8px;
+  cursor: pointer;
+}
 }

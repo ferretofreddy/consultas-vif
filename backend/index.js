@@ -25,6 +25,8 @@ app.use((req, res, next) => { // configuracion de server
 
 app.use(isAuth)
 
+app.use('/', express.static('build', { redirect: false }))
+
 app.use(
   '/graphql',
   graphqlHttp({
@@ -34,10 +36,8 @@ app.use(
   })
 )
 
-app.use(express.static(path.join(__dirname, 'build')))
-
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+app.get('*', function (req, res, next) {
+  res.sendFile(path.resolve('build/index.html'))
 })
 
 mongoose

@@ -90,7 +90,7 @@ class CreateCasoPage extends Component {
     this.setState({
       Result: false,
       Duplicado: false,
-      expediente: null, 
+      expediente: null,
       NewCaso: true,
       imputadoId: null,
       imputadoIdentificacion: null,
@@ -529,97 +529,117 @@ class CreateCasoPage extends Component {
 
         {this.state.CreateImputado && (
           <div className="container">
-            <form className="" onSubmit={this.crearPersonaHandler}>
-              <legend className="">Crear Imputado</legend>
-              <div className="">
-                <label>Nombre</label>
-                <input type="text" className="" ref={this.nombreEl} />
-              </div>
-              <div className="">
-                <label>Identificación</label>
-                <input type="" className="" ref={this.PersonaIdentificacionEl} />
-              </div>
-              <div className="">
-                <label>Fecha de nacimiento</label>
-                <input type="date" className="" ref={this.f_nacimientoEl} />
-              </div>
-              <div className="">
-                <label>Sexo</label>
-                <select className="" ref={this.sexoEl}>
-                  <option>Masculino</option>
-                  <option>Femenino</option>
-                </select>
-              </div>
-              <div className="">
-                <label>Edad</label>
-                <input type="number" className="" ref={this.edadEl} />
-              </div>
-              <div className="">
-                <label>Provincia</label>
-                <input type="text" className="" ref={this.provinciaEl} />
-              </div>
-              <div className="">
-                <label>Cantón</label>
-                <input type="text" className="" ref={this.cantonEl} />
-              </div>
-              <div className="">
-                <label>Distrito</label>
-                <input type="text" className="" ref={this.distritoEl} />
-              </div>
-              <div className="">
-                <label>Dirección exacta</label>
-                <textarea className="" ref={this.direccionEl} />
-              </div>
-              <button type="submit" className="">Guardar Persona</button>
-            </form>
+            <div className='FormHeader'>
+              <h2 className="FormHeaderH2">Crear Imputado</h2>
+            </div>
+            <div className='FormBody'>
+              <form className="FormSubmit" onSubmit={this.crearPersonaHandler}>
+                <div className='FormBodyRow'>
+                  <div className="FormBodyGroup">
+                    <span>Nombre</span>
+                    <input type="text" className="" ref={this.nombreEl} />
+                  </div>
+                  <div className="FormBodyGroup">
+                    <span>Identificación</span>
+                    <input type="" className="" ref={this.PersonaIdentificacionEl} />
+                  </div>
+                  <div className="FormBodyGroup">
+                    <span>Fecha de nacimiento</span>
+                    <input type="date" className="" ref={this.f_nacimientoEl} />
+                  </div>
+                </div>
+                <div className='FormBodyRow'>
+                  <div className="FormBodyGroup">
+                    <span>Sexo</span>
+                    <select className="" ref={this.sexoEl}>
+                      <option>Masculino</option>
+                      <option>Femenino</option>
+                    </select>
+                  </div>
+                  <div className="FormBodyGroup">
+                    <span>Edad</span>
+                    <input type="number" className="" ref={this.edadEl} />
+                  </div>
+                </div>
+                <div className='FormBodyRow'>
+                  <div className="FormBodyGroup">
+                    <span>Provincia</span>
+                    <input type="text" className="" ref={this.provinciaEl} />
+                  </div>
+                  <div className="FormBodyGroup">
+                    <span>Cantón</span>
+                    <input type="text" className="" ref={this.cantonEl} />
+                  </div>
+                  <div className="FormBodyGroup">
+                    <span>Distrito</span>
+                    <input type="text" className="" ref={this.distritoEl} />
+                  </div>
+                  <div className="FormBodyGroup">
+                    <span>Dirección exacta</span>
+                    <textarea className="" ref={this.direccionEl} />
+                  </div>
+                </div>
+                <button type="submit" className="CreateFormBtn">Guardar Persona</button>
+              </form>
+            </div>
           </div>
         )}
 
         {this.state.CreateOfendido && (
           <div className="container">
-            <form className="" onSubmit={this.crearPersonaHandler}>
-              <legend className="">Crear Ofendido</legend>
-              <div className="">
-                <label>Nombre</label>
-                <input type="text" className="" ref={this.nombreEl} />
-              </div>
-              <div className="">
-                <label>Identificación</label>
-                <input type="text" className="" ref={this.PersonaIdentificacionEl} />
-              </div>
-              <div className="">
-                <label>Fecha de nacimiento</label>
-                <input type="date" className="" ref={this.f_nacimientoEl} />
-              </div>
-              <div className="">
-                <label>Sexo</label>
-                <select className="" ref={this.sexoEl}>
-                  <option>Masculino</option>
-                  <option>Femenino</option>
-                </select>
-              </div>
-              <div className="">
-                <label>Edad</label>
-                <input type="number" className="" ref={this.edadEl} />
-              </div>
-              <div className="">
-                <label>Provincia</label>
-                <input type="text" className="" ref={this.provinciaEl} />
-              </div>
-              <div className="">
-                <label>Cantón</label>
-                <input type="text" className="" ref={this.cantonEl} />
-              </div>
-              <div className="">
-                <label>Distrito</label>
-                <input type="text" className="" ref={this.distritoEl} />
-              </div>
-              <div className="">
-                <label>Dirección exacta</label>
-                <textarea className="" ref={this.direccionEl} />
-              </div>
-              <button type="submit" className="">Guardar Persona</button>
-            </form>
+            <div className='FormHeader'>
+              <h2 className="FormHeaderH2">Crear Ofendido</h2>
+            </div>
+            <div className='FormBody'>
+              <form className="FormSubmit" onSubmit={this.crearPersonaHandler}>
+                <div className='FormBodyRow'>
+                  <div className="FormBodyGroup">
+                    <span>Nombre</span>
+                    <input type="text" className="" ref={this.nombreEl} />
+                  </div>
+                  <div className="FormBodyGroup">
+                    <span>Identificación</span>
+                    <input type="" className="" ref={this.PersonaIdentificacionEl} />
+                  </div>
+                  <div className="FormBodyGroup">
+                    <span>Fecha de nacimiento</span>
+                    <input type="date" className="" ref={this.f_nacimientoEl} />
+                  </div>
+                </div>
+                <div className='FormBodyRow'>
+                  <div className="FormBodyGroup">
+                    <span>Sexo</span>
+                    <select className="" ref={this.sexoEl}>
+                      <option>Masculino</option>
+                      <option>Femenino</option>
+                    </select>
+                  </div>
+                  <div className="FormBodyGroup">
+                    <span>Edad</span>
+                    <input type="number" className="" ref={this.edadEl} />
+                  </div>
+                </div>
+                <div className='FormBodyRow'>
+                  <div className="FormBodyGroup">
+                    <span>Provincia</span>
+                    <input type="text" className="" ref={this.provinciaEl} />
+                  </div>
+                  <div className="FormBodyGroup">
+                    <span>Cantón</span>
+                    <input type="text" className="" ref={this.cantonEl} />
+                  </div>
+                  <div className="FormBodyGroup">
+                    <span>Distrito</span>
+                    <input type="text" className="" ref={this.distritoEl} />
+                  </div>
+                  <div className="FormBodyGroup">
+                    <span>Dirección exacta</span>
+                    <textarea className="" ref={this.direccionEl} />
+                  </div>
+                </div>
+                <button type="submit" className="CreateFormBtn">Guardar Persona</button>
+              </form>
+            </div>
           </div>
         )}
 

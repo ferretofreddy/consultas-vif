@@ -307,7 +307,7 @@ class UpadateCasoPage extends Component {
         {this.state.modificarExpediente && (
           <div className="container">
             <form className="newCasoForm" onSubmit={this.UpdateCasoHandler}>
-              <legend className="newCasoFormLegend">Actualizar expediente judicial</legend>
+              <legend className="newCasoFormLegend">Actualizar expediente</legend>
               <div className="newCasoFormGroup">
                 <span className="newCasoFormLabel">Expediente</span>
                 <input className="newCasoFormInput" type="text" defaultValue={this.state.expediente} ref={this.expedienteEl} />

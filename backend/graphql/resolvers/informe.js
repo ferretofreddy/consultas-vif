@@ -192,9 +192,9 @@ module.exports = {
   },
 
   crearInforme: async (args, req) => {
-    /*  if (!req.isAuth) {
+    if (!req.isAuth) {
       throw new Error('Acceso Denegado!')
-    } */
+    }
 
     const informeExistente = await Informe.findOne({ nInforme: args.informeInput.nInforme })
     if (informeExistente) {

@@ -228,9 +228,9 @@ module.exports = {
   },
 
   crearCaso: async (args, req) => {
-    /* if (!req.isAuth) {
+    if (!req.isAuth) {
       throw new Error('Acceso Denegado!')
-    } */
+    }
 
     const casoExistente = await Caso.findOne({ expediente: args.casoInput.expediente })
     if (casoExistente) {
